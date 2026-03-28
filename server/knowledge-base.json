@@ -1,0 +1,195 @@
+{
+  "version": "2026-03-26",
+  "brand": "Reel Mate",
+  "sales_scope": {
+    "supported_regions": [
+      "United States",
+      "European Union countries"
+    ],
+    "unsupported_regions": "Orders outside the United States and EU countries are not supported at this stage."
+  },
+  "documents": [
+    {
+      "id": "product-overview",
+      "source": "index.html",
+      "title": "Reel Mate product overview",
+      "keywords": [
+        "overview",
+        "portable offshore power",
+        "electric reel battery",
+        "reel mate"
+      ],
+      "content": "Reel Mate is a premium portable offshore power system for electric reel fishing. It is positioned as a lighter, cleaner, and easier-to-carry alternative to bulky traditional battery setups used on boats."
+    },
+    {
+      "id": "core-specs",
+      "source": "index.html",
+      "title": "Core specifications",
+      "keywords": [
+        "20Ah",
+        "296Wh",
+        "IP65",
+        "2-year warranty",
+        "weight"
+      ],
+      "content": "Key headline specifications presented on the site include 20Ah capacity, 296Wh battery energy, IP65 outdoor protection, and a 2-year warranty. The product is also described as approximately 1.65kg for easier boat movement."
+    },
+    {
+      "id": "compatibility-positioning",
+      "source": "index.html",
+      "title": "Compatibility positioning",
+      "keywords": [
+        "compatibility",
+        "DAIWA",
+        "SHIMANO",
+        "electric reels",
+        "connector type",
+        "reel model"
+      ],
+      "content": "Reel Mate is positioned for common DAIWA and SHIMANO electric reel applications. Final compatibility should be confirmed by reel model, connector type, voltage, and intended use before payment if the buyer is unsure."
+    },
+    {
+      "id": "full-kit-contents",
+      "source": "index.html",
+      "title": "Full kit contents",
+      "keywords": [
+        "what's included",
+        "full kit",
+        "charger",
+        "cable",
+        "protective case",
+        "shoulder strap",
+        "carrying bag"
+      ],
+      "content": "The full kit includes the battery unit, charger set, output cable set, protective case, shoulder strap, and carrying bag. The product is presented as a ready-to-use offshore power kit rather than a battery-only listing."
+    },
+    {
+      "id": "pricing",
+      "source": "index.html",
+      "title": "Retail price",
+      "keywords": [
+        "price",
+        "699",
+        "US$699",
+        "retail"
+      ],
+      "content": "The listed retail price is US$699 for the complete ready-to-use Reel Mate full kit."
+    },
+    {
+      "id": "payment-methods",
+      "source": "payment.html",
+      "title": "Payment methods and checkout structure",
+      "keywords": [
+        "payment",
+        "card",
+        "paypal",
+        "checkout",
+        "secure payment"
+      ],
+      "content": "The checkout structure supports card payment, PayPal, and a guided secure order review step. Card payment is positioned as the fastest route, while PayPal is also available for supported buyers in the United States and EU."
+    },
+    {
+      "id": "checkout-destinations",
+      "source": "payment.html",
+      "title": "Checkout destination limits",
+      "keywords": [
+        "United States",
+        "EU",
+        "European Union",
+        "supported countries",
+        "unsupported region"
+      ],
+      "content": "Sales are currently limited to the United States and EU countries. The payment and checkout flow should not be offered to unsupported regions."
+    },
+    {
+      "id": "shipping-guidance",
+      "source": "shipping.html",
+      "title": "Shipping guidance",
+      "keywords": [
+        "shipping",
+        "delivery",
+        "destination",
+        "country",
+        "US",
+        "EU"
+      ],
+      "content": "Before payment, buyers can confirm destination country, quantity, and any special shipping details. Reel Mate currently ships only to the United States and EU countries, and recommends reviewing destination and order scope before final checkout."
+    },
+    {
+      "id": "warranty-coverage",
+      "source": "warranty.html",
+      "title": "Warranty coverage",
+      "keywords": [
+        "warranty",
+        "2 years",
+        "coverage",
+        "intended use"
+      ],
+      "content": "Reel Mate includes 2-year warranty support for normal intended offshore and boat-fishing use. Buyers are encouraged to confirm fit and intended application before ordering if anything is unclear."
+    },
+    {
+      "id": "returns-process",
+      "source": "returns.html",
+      "title": "Returns and support-first review",
+      "keywords": [
+        "returns",
+        "refund",
+        "support",
+        "order issue"
+      ],
+      "content": "Reel Mate uses a support-first review process rather than a fully automated return portal. Buyers should confirm compatibility and shipping details before payment, and contact support directly with order details if an issue needs review."
+    },
+    {
+      "id": "brand-story",
+      "source": "about.html",
+      "title": "Brand story and positioning",
+      "keywords": [
+        "brand",
+        "about",
+        "premium",
+        "portable",
+        "offshore"
+      ],
+      "content": "Reel Mate is presented as a premium portable offshore power brand focused on making electric reel setups cleaner, lighter, and easier to manage on real boat trips."
+    },
+    {
+      "id": "wholesale-positioning",
+      "source": "wholesale.html",
+      "title": "Wholesale and partner positioning",
+      "keywords": [
+        "wholesale",
+        "dealer",
+        "partner",
+        "tackle shop",
+        "private label",
+        "OEM"
+      ],
+      "content": "Reel Mate supports dealer conversations, sample orders, custom colors, private label discussion, and wholesale programs for tackle shops, charter operators, and regional distributors."
+    },
+    {
+      "id": "support-console",
+      "source": "contact.html",
+      "title": "Customer support scope",
+      "keywords": [
+        "support",
+        "contact",
+        "compatibility",
+        "shipping help",
+        "payment help"
+      ],
+      "content": "The support experience is designed to answer questions about compatibility, shipping, payment methods, warranty, and kit contents before checkout. It should guide the buyer clearly and escalate when confidence is low."
+    },
+    {
+      "id": "product-sheet-summary",
+      "source": "product-sheet.pdf",
+      "title": "Product sheet summary",
+      "keywords": [
+        "product sheet",
+        "pdf",
+        "catalog",
+        "datasheet"
+      ],
+      "content": "The downloadable product sheet supports export communication and dealer presentation. It should be treated as a supporting reference for product overview, kit composition, and positioning, while the website remains the latest customer-facing source."
+    }
+  ]
+}

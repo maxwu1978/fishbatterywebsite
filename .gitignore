@@ -1,2 +1,4 @@
 .DS_Store
 deploy-preview/
+__pycache__/
+*.pyc

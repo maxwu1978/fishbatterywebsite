@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://127.0.0.1:8000/</loc>
+    <loc>https://maxwu1978.github.io/fishbatterywebsite/</loc>
   </url>
   <url>
-    <loc>http://127.0.0.1:8000/contact.html</loc>
+    <loc>https://maxwu1978.github.io/fishbatterywebsite/about.html</loc>
   </url>
   <url>
-    <loc>http://127.0.0.1:8000/about.html</loc>
+    <loc>https://maxwu1978.github.io/fishbatterywebsite/contact.html</loc>
   </url>
   <url>
-    <loc>http://127.0.0.1:8000/wholesale.html</loc>
+    <loc>https://maxwu1978.github.io/fishbatterywebsite/wholesale.html</loc>
+  </url>
+  <url>
+    <loc>https://maxwu1978.github.io/fishbatterywebsite/payment.html</loc>
+  </url>
+  <url>
+    <loc>https://maxwu1978.github.io/fishbatterywebsite/shipping.html</loc>
+  </url>
+  <url>
+    <loc>https://maxwu1978.github.io/fishbatterywebsite/warranty.html</loc>
+  </url>
+  <url>
+    <loc>https://maxwu1978.github.io/fishbatterywebsite/returns.html</loc>
   </url>
 </urlset>

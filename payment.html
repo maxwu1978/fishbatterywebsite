@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buy Reel Mate | Solaris Marine Checkout</title>
+    <meta
+      name="description"
+      content="Reel Mate checkout page in a sunny beach tech style with shipping, customer details, payment methods, and a high-contrast order summary."
+    />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=20260326f" />
+  </head>
+  <body class="payment-page">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="reel-mate-simple-light.svg" alt="Reel Mate" />
+        <span class="brand-sub">Portable Offshore Power</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#specs">Specs</a>
+        <a href="payment.html">Order</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <a class="button button-small" href="product-sheet.pdf">Product Sheet</a>
+    </header>
+
+    <main class="subpage-main payment-main solar-main">
+      <section class="solar-intro glass-card">
+        <div>
+          <p class="eyebrow">Solaris Marine Checkout</p>
+          <h1>Sunny Beach Tech Checkout for Reel Mate</h1>
+          <p class="hero-text">
+            Complete your order with a brighter, beach-inspired checkout flow.
+            Shipping, customer details, and payment selection stay on the left,
+            while the order total and trust details remain fixed on the right.
+          </p>
+          <p class="payment-region-note">
+            Sales are currently limited to the United States and EU countries.
+          </p>
+        </div>
+        <div class="payment-badges">
+          <span>Card Payment</span>
+          <span>PayPal</span>
+          <span>US + EU Only</span>
+          <span>High Contrast UI</span>
+        </div>
+      </section>
+
+      <section class="checkout-shell">
+        <div class="checkout-left">
+          <article class="glass-card checkout-stepper-card">
+            <p class="eyebrow">Progress</p>
+            <div class="checkout-stepper">
+              <div class="checkout-step is-active">
+                <span>1</span>
+                <div>
+                  <strong>Shipping</strong>
+                  <small>Choose a supported US or EU destination</small>
+                </div>
+              </div>
+              <div class="checkout-step is-active">
+                <span>2</span>
+                <div>
+                  <strong>Details</strong>
+                  <small>Enter customer and reel information</small>
+                </div>
+              </div>
+              <div class="checkout-step">
+                <span>3</span>
+                <div>
+                  <strong>Payment</strong>
+                <small>Select card or PayPal for checkout</small>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="glass-card checkout-form-card">
+            <p class="eyebrow">Customer Info</p>
+            <h2>Customer Details</h2>
+            <form class="checkout-form" action="#">
+              <div class="checkout-grid">
+                <label>
+                  First Name
+                  <input type="text" placeholder="Alex" />
+                </label>
+                <label>
+                  Last Name
+                  <input type="text" placeholder="Morgan" />
+                </label>
+                <label>
+                  Email
+                  <input type="email" placeholder="alex@example.com" />
+                </label>
+                <label>
+                  Phone
+                  <input type="tel" placeholder="+1 555 000 0000" />
+                </label>
+                <label>
+                  Country / Region
+                  <select>
+                    <option>United States</option>
+                    <option>Germany</option>
+                    <option>France</option>
+                    <option>Spain</option>
+                    <option>Italy</option>
+                    <option>Netherlands</option>
+                    <option>Other EU Country</option>
+                  </select>
+                </label>
+                <label>
+                  Currency
+                  <select>
+                    <option>USD</option>
+                    <option>EUR</option>
+                  </select>
+                </label>
+                <label class="checkout-field-wide">
+                  Shipping Address
+                  <input type="text" placeholder="Street address" />
+                </label>
+                <label>
+                  City
+                  <input type="text" placeholder="City" />
+                </label>
+                <label>
+                  Postal Code
+                  <input type="text" placeholder="Postal code" />
+                </label>
+                <label class="checkout-field-wide">
+                  Reel Model
+                  <input type="text" placeholder="Example: SHIMANO Beastmaster 3000" />
+                </label>
+              </div>
+            </form>
+          </article>
+
+          <article class="glass-card checkout-shipping-card">
+            <p class="eyebrow">Shipping Method</p>
+            <h2>Choose Delivery Speed</h2>
+            <div class="shipping-options">
+              <label class="shipping-option shipping-option-active">
+                <input type="radio" name="shipping-method" checked />
+                <div>
+                  <strong>Standard Marine Delivery</strong>
+                  <span>Best balance for supported orders in the US and EU</span>
+                </div>
+                <em>Included review</em>
+              </label>
+              <label class="shipping-option">
+                <input type="radio" name="shipping-method" />
+                <div>
+                  <strong>Priority Processing</strong>
+                  <span>Faster order preparation and shipping coordination</span>
+                </div>
+                <em>Ask support</em>
+              </label>
+            </div>
+          </article>
+
+          <article class="glass-card checkout-payment-card">
+            <p class="eyebrow">Payment</p>
+            <h2>Choose a Payment Method</h2>
+            <div class="checkout-payment-grid">
+              <label class="payment-choice payment-choice-active">
+                <input type="radio" name="payment-choice" checked />
+                <strong>Card Payment</strong>
+                <span>Visa, Mastercard, and direct card checkout</span>
+              </label>
+              <label class="payment-choice">
+                <input type="radio" name="payment-choice" />
+                <strong>PayPal</strong>
+                <span>Quick checkout option for supported US and EU buyers</span>
+              </label>
+              <label class="payment-choice">
+                <input type="radio" name="payment-choice" />
+                <strong>Secure Order Review</strong>
+                <span>Use a guided final review step before the payment link is issued</span>
+              </label>
+            </div>
+          </article>
+        </div>
+
+        <aside class="checkout-right">
+          <article class="glass-card order-summary-card">
+            <p class="eyebrow">Order Summary</p>
+            <h2>Reel Mate Full Kit</h2>
+            <div class="summary-product">
+              <img src="资料/new imaage/cover.jpg" alt="Reel Mate battery kit" />
+              <div>
+                <strong>Portable Offshore Power Kit</strong>
+                <span>Battery, charger, output cable, case, strap, carrying bag</span>
+              </div>
+            </div>
+
+            <div class="summary-breakdown">
+              <div><span>Full Kit</span><strong>US$699</strong></div>
+              <div><span>Shipping Review</span><strong>Included</strong></div>
+              <div><span>Warranty Support</span><strong>2 Years</strong></div>
+            </div>
+
+            <div class="summary-total">
+              <span>Total</span>
+              <strong>US$699</strong>
+            </div>
+
+            <a class="checkout-cta" href="contact.html">Continue to Secure Payment</a>
+
+            <div class="trust-badges">
+              <span>Secure checkout path</span>
+              <span>US and EU sales only</span>
+              <span>PayPal available</span>
+              <span>High-contrast UI</span>
+            </div>
+
+            <div class="summary-links">
+              <a href="shipping.html">Shipping</a>
+              <a href="warranty.html">Warranty</a>
+              <a href="returns.html">Returns</a>
+            </div>
+          </article>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>Reel Mate</strong>
+        <p>Portable offshore power for common DAIWA / SHIMANO electric reel applications.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="payment.html">Order</a>
+        <a href="shipping.html">Shipping</a>
+        <a href="warranty.html">Warranty</a>
+        <a href="returns.html">Returns</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
+    <script src="chat-config.js"></script>
+    <script src="support-chat.js"></script>
+  </body>
+</html>

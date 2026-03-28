@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 96" role="img" aria-labelledby="title desc">
+  <title id="title">Reel Mate</title>
+  <desc id="desc">Light text logo for Reel Mate.</desc>
+  <defs>
+    <linearGradient id="reelMateLightFill" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#eef6ff"/>
+    </linearGradient>
+    <linearGradient id="mateLightLine" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="62%" stop-color="#dcefff"/>
+      <stop offset="100%" stop-color="#ff7a3c"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(6 10)">
+    <text
+      x="0"
+      y="54"
+      fill="url(#reelMateLightFill)"
+      font-family="Rajdhani, Barlow, sans-serif"
+      font-size="54"
+      font-weight="700"
+      letter-spacing="1.5"
+      transform="skewX(-8)"
+    >
+      REEL MATE
+    </text>
+    <path d="M3 69c58 5 118 5 178 0" fill="none" stroke="url(#mateLightLine)" stroke-linecap="round" stroke-width="6"/>
+    <circle cx="246" cy="24" r="7" fill="#ff7a3c"/>
+    <path d="M223 7c18 6 29 18 31 38" fill="none" stroke="#ff7a3c" stroke-linecap="round" stroke-width="4.5"/>
+  </g>
+</svg>

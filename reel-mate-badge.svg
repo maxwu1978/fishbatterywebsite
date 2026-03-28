@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">Reel Mate badge</title>
+  <desc id="desc">A compact text-led badge logo for Reel Mate.</desc>
+  <defs>
+    <linearGradient id="badgeBg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f4261"/>
+      <stop offset="100%" stop-color="#0a2c3f"/>
+    </linearGradient>
+    <linearGradient id="badgeAccent" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#62d3e0"/>
+      <stop offset="100%" stop-color="#ff6b2d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="320" height="320" rx="56" fill="url(#badgeBg)"/>
+  <text
+    x="46"
+    y="138"
+    fill="#ffffff"
+    font-family="Rajdhani, Barlow, sans-serif"
+    font-size="76"
+    font-weight="700"
+    letter-spacing="1"
+    transform="skewX(-8)"
+  >
+    REEL
+  </text>
+  <text
+    x="46"
+    y="208"
+    fill="#ffffff"
+    font-family="Rajdhani, Barlow, sans-serif"
+    font-size="76"
+    font-weight="700"
+    letter-spacing="1"
+    transform="skewX(-8)"
+  >
+    MATE
+  </text>
+  <path d="M46 228c82 8 161 8 228 0" fill="none" stroke="url(#badgeAccent)" stroke-linecap="round" stroke-width="10"/>
+  <circle cx="243" cy="76" r="11" fill="#ff6b2d"/>
+  <path d="M209 41c24 8 39 24 42 51 2 22-6 42-24 57" fill="none" stroke="#ff6b2d" stroke-linecap="round" stroke-width="7"/>
+</svg>

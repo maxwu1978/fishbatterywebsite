@@ -1,0 +1,44 @@
+{
+  "version": "2026-03-26",
+  "default_mode": "ai_first",
+  "human_handoff_provider": "Crisp",
+  "handoff_rules": [
+    {
+      "id": "unsupported-region",
+      "trigger": "Buyer is outside the United States or EU countries.",
+      "action": "Respond with sales-region limitation. Do not offer checkout. Offer human support only if the buyer has a special business request."
+    },
+    {
+      "id": "compatibility-unclear",
+      "trigger": "Question requires exact compatibility confirmation by reel model, connector, voltage, or unusual use case.",
+      "action": "Answer with the positioning statement first, then recommend human handoff if fit cannot be confirmed confidently from the knowledge base."
+    },
+    {
+      "id": "order-payment-issue",
+      "trigger": "Payment failure, PayPal problem, card error, duplicate charge, or order-status dispute.",
+      "action": "Escalate to human support immediately."
+    },
+    {
+      "id": "return-or-warranty-dispute",
+      "trigger": "Refund demand, return dispute, damage claim, warranty disagreement, or emotional complaint.",
+      "action": "Escalate to human support immediately with a concise summary."
+    },
+    {
+      "id": "low-confidence",
+      "trigger": "No strong knowledge-base match, weak answer confidence, or the user says the answer did not help.",
+      "action": "Offer human handoff after one clarifying attempt."
+    },
+    {
+      "id": "human-requested",
+      "trigger": "User asks for a human, agent, support rep, staff member, or live chat.",
+      "action": "Transfer to human support immediately."
+    }
+  ],
+  "response_rules": [
+    "Use website and product-sheet content as the primary source of truth.",
+    "Do not invent compatibility approvals beyond what the knowledge base supports.",
+    "Do not promise shipping outside the United States and EU countries.",
+    "Use concise retail-friendly language.",
+    "When unsure, say what is known and transfer to human support."
+  ]
+}

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 260" role="img" aria-labelledby="title desc">
+  <title id="title">Reel Mate wordmark</title>
+  <desc id="desc">A text-based Reel Mate logo with a friendly offshore gear feel.</desc>
+  <defs>
+    <linearGradient id="reelMateStroke" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#0a2c3f"/>
+      <stop offset="55%" stop-color="#1a8ca1"/>
+      <stop offset="100%" stop-color="#ff6b2d"/>
+    </linearGradient>
+    <linearGradient id="reelMateFill" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#113954"/>
+      <stop offset="100%" stop-color="#0a2c3f"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="980" height="260" rx="44" fill="none"/>
+
+  <g transform="translate(54 48)">
+    <text
+      x="0"
+      y="104"
+      fill="url(#reelMateFill)"
+      font-family="Rajdhani, Barlow, sans-serif"
+      font-size="116"
+      font-weight="700"
+      letter-spacing="1.5"
+      transform="skewX(-8)"
+    >
+      REEL
+    </text>
+
+    <text
+      x="356"
+      y="104"
+      fill="url(#reelMateFill)"
+      font-family="Rajdhani, Barlow, sans-serif"
+      font-size="116"
+      font-weight="700"
+      letter-spacing="1.5"
+      transform="skewX(-8)"
+    >
+      MATE
+    </text>
+
+    <path d="M2 134c118 8 230 9 330 2" fill="none" stroke="url(#reelMateStroke)" stroke-linecap="round" stroke-width="10"/>
+    <path d="M355 134c90 10 192 8 307-3" fill="none" stroke="url(#reelMateStroke)" stroke-linecap="round" stroke-width="10"/>
+
+    <path d="M690 20c35 11 57 34 60 73 2 31-10 58-33 78" fill="none" stroke="#ff6b2d" stroke-linecap="round" stroke-width="8"/>
+    <circle cx="754" cy="99" r="12" fill="#ff6b2d"/>
+
+    <text
+      x="5"
+      y="164"
+      fill="#587180"
+      font-family="Barlow, Arial, sans-serif"
+      font-size="23"
+      font-weight="700"
+      letter-spacing="4"
+    >
+      PORTABLE OFFSHORE POWER
+    </text>
+  </g>
+</svg>
