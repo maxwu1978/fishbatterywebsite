@@ -12,13 +12,15 @@
       name="keywords"
       content="electric reel battery, DAIWA battery, SHIMANO battery, offshore fishing battery, portable fishing reel battery"
     />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://client.crisp.chat; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://client.crisp.chat; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://www.youtube.com; connect-src 'self' https://client.crisp.chat wss://client.relay.crisp.chat" />
+    <link rel="canonical" href="https://maxwu1978.github.io/fishbatterywebsite/" />
     <meta property="og:title" content="Reel Mate Portable Battery for DAIWA / SHIMANO Electric Reels" />
     <meta
       property="og:description"
       content="Portable offshore power with visible battery status, IP65 protection, and common DAIWA / SHIMANO electric reel application positioning."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="资料/new imaage/c1ec84332049dec59539c7a6fe4f58fa.jpg" />
+    <meta property="og:image" content="https://maxwu1978.github.io/fishbatterywebsite/资料/new imaage/c1ec84332049dec59539c7a6fe4f58fa.jpg" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -590,11 +592,11 @@
             checkout.
           </p>
           <div class="contact-links">
-            <a href="mailto:service@roopvrt.com">service@roopvrt.com</a>
-            <a href="https://www.roopvrt.com/" target="_blank" rel="noreferrer">www.roopvrt.com</a>
+            <a class="js-email" data-u="service" data-d="roopvrt.com">Loading…</a>
+            <a href="https://www.roopvrt.com/" target="_blank" rel="noopener noreferrer">www.roopvrt.com</a>
           </div>
         </div>
-        <form class="contact-form" action="mailto:service@roopvrt.com" method="post" enctype="text/plain">
+        <form class="contact-form" id="inquiry-form">
           <label>
             Name
             <input type="text" name="name" placeholder="Your name" />
@@ -630,6 +632,7 @@
             <textarea name="message" rows="6" placeholder="Tell us what you want to clarify before payment, such as reel model fit, shipping country, preferred payment method, or included accessories."></textarea>
           </label>
           <button class="button" type="submit">Contact Customer Support</button>
+        <p class="form-status" id="form-status" style="display:none;margin-top:1rem;font-weight:600;"></p>
         </form>
       </section>
     </main>
@@ -646,11 +649,58 @@
         <a href="shipping.html">Shipping</a>
         <a href="warranty.html">Warranty</a>
         <a href="returns.html">Returns</a>
-        <a href="mailto:service@roopvrt.com">Email</a>
+        <a class="js-email" data-u="service" data-d="roopvrt.com">Email</a>
         <a href="contact.html">Contact</a>
       </div>
     </footer>
     <script src="chat-config.js"></script>
     <script src="support-chat.js"></script>
+    <script>
+    (function () {
+      // Reveal obfuscated emails
+      document.querySelectorAll('.js-email').forEach(function (el) {
+        var addr = el.dataset.u + '@' + el.dataset.d;
+        el.href = 'mailto:' + addr;
+        if (el.textContent === 'Loading…') el.textContent = addr;
+      });
+      // Inquiry form submission
+      var form = document.getElementById('inquiry-form');
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var status = document.getElementById('form-status');
+        var btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        status.style.display = 'block';
+        status.textContent = 'Submitting…';
+        status.style.color = '';
+        var data = {};
+        form.querySelectorAll('input, select, textarea').forEach(function (el) {
+          if (el.name) data[el.name] = el.value;
+        });
+        fetch('/api/inquiry', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          if (res.success) {
+            status.textContent = 'Thank you! We received your inquiry and will get back to you soon.';
+            status.style.color = '#0c7d82';
+            form.reset();
+          } else {
+            status.textContent = res.error || 'Something went wrong. Please try again.';
+            status.style.color = '#c0392b';
+          }
+        })
+        .catch(function () {
+          status.textContent = 'Network error. Please check your connection and try again.';
+          status.style.color = '#c0392b';
+        })
+        .finally(function () { btn.disabled = false; });
+      });
+    })();
+    </script>
   </body>
 </html>
