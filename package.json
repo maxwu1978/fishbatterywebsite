@@ -1,0 +1,10 @@
+{
+  "name": "reelmate-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Reel Mate static marketing site with Vercel payment endpoint",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "stripe": "^22.0.0"
+  }
+}

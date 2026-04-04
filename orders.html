@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reel Mate Orders</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=20260326f" />
+  </head>
+  <body class="solar-site">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="reel-mate-simple-light.svg" alt="Reel Mate" />
+        <span class="brand-sub">Order Records</span>
+      </a>
+    </header>
+
+    <main class="subpage-main">
+      <section class="subpage-hero">
+        <div>
+          <p class="eyebrow">Internal Orders</p>
+          <h1>Stripe Order Records</h1>
+          <p class="hero-text">
+            This page reads recent Stripe Checkout payments from the protected order-records API.
+            Enter the internal token to load recent paid sessions.
+          </p>
+        </div>
+        <div class="subpage-panel">
+          <h3>What you can see</h3>
+          <ul>
+            <li>Checkout session ID</li>
+            <li>Buyer email and address</li>
+            <li>Reel model metadata</li>
+            <li>Payment status and amount</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="glass-card" style="padding:1.5rem;">
+        <div class="checkout-grid">
+          <label class="checkout-field-wide">
+            Internal Access Token
+            <input id="orders-token" type="password" placeholder="Paste ORDER_RECORDS_TOKEN" />
+          </label>
+        </div>
+        <div style="display:flex;gap:0.8rem;flex-wrap:wrap;margin-top:1rem;">
+          <button id="load-orders" class="button" type="button">Load Orders</button>
+          <button id="clear-orders" class="button button-secondary" type="button">Clear</button>
+        </div>
+        <div id="orders-status" style="display:none;margin-top:1rem;padding:0.9rem 1rem;border-radius:14px;font-weight:600;"></div>
+      </section>
+
+      <section class="glass-card" style="padding:1.5rem;margin-top:1.5rem;">
+        <div id="orders-list" style="display:grid;gap:1rem;"></div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        const tokenInput = document.getElementById("orders-token");
+        const loadButton = document.getElementById("load-orders");
+        const clearButton = document.getElementById("clear-orders");
+        const statusBox = document.getElementById("orders-status");
+        const list = document.getElementById("orders-list");
+
+        function setStatus(message, tone) {
+          const palette = {
+            info: { bg: "rgba(24, 82, 137, 0.12)", border: "rgba(24, 82, 137, 0.35)", color: "#184a7d" },
+            success: { bg: "rgba(18, 117, 67, 0.12)", border: "rgba(18, 117, 67, 0.35)", color: "#0d5d36" },
+            error: { bg: "rgba(166, 48, 48, 0.12)", border: "rgba(166, 48, 48, 0.35)", color: "#8a2222" }
+          };
+          const style = palette[tone] || palette.info;
+          statusBox.style.display = "block";
+          statusBox.style.background = style.bg;
+          statusBox.style.border = `1px solid ${style.border}`;
+          statusBox.style.color = style.color;
+          statusBox.textContent = message;
+        }
+
+        function renderRecord(record) {
+          const article = document.createElement("article");
+          article.className = "subpage-card";
+          const created = new Date(record.created * 1000).toLocaleString();
+          article.innerHTML = `
+            <p class="eyebrow">Order</p>
+            <h2 style="font-size:1.1rem;word-break:break-all;">${record.id}</h2>
+            <p><strong>Created:</strong> ${created}</p>
+            <p><strong>Email:</strong> ${record.customerEmail || "-"}</p>
+            <p><strong>Name:</strong> ${record.customerName || [record.firstName, record.lastName].filter(Boolean).join(" ") || "-"}</p>
+            <p><strong>Amount:</strong> ${(record.amountTotal / 100).toFixed(2)} ${String(record.currency || "").toUpperCase()}</p>
+            <p><strong>Status:</strong> ${record.paymentStatus || record.status || "-"}</p>
+            <p><strong>Country:</strong> ${record.country || "-"}</p>
+            <p><strong>Address:</strong> ${record.shippingAddress || "-"} ${record.city || ""} ${record.postalCode || ""}</p>
+            <p><strong>Reel Model:</strong> ${record.reelModel || "-"}</p>
+          `;
+          return article;
+        }
+
+        async function loadOrders() {
+          const token = tokenInput.value.trim();
+          if (!token) {
+            setStatus("Enter the internal access token first.", "error");
+            return;
+          }
+
+          list.innerHTML = "";
+          setStatus("Loading recent Stripe order records...", "info");
+
+          try {
+            const response = await fetch(`/api/orders?limit=20`, {
+              headers: {
+                "x-order-token": token
+              }
+            });
+            const result = await response.json();
+
+            if (!response.ok) {
+              throw new Error(result.error || "Unable to load order records.");
+            }
+
+            if (!result.records || result.records.length === 0) {
+              setStatus("No Stripe order records found yet.", "info");
+              return;
+            }
+
+            result.records.forEach((record) => {
+              list.appendChild(renderRecord(record));
+            });
+
+            setStatus(`Loaded ${result.records.length} recent Stripe order records.`, "success");
+          } catch (error) {
+            setStatus(error.message || "Unable to load order records.", "error");
+          }
+        }
+
+        loadButton.addEventListener("click", loadOrders);
+        clearButton.addEventListener("click", () => {
+          tokenInput.value = "";
+          list.innerHTML = "";
+          statusBox.style.display = "none";
+        });
+      })();
+    </script>
+  </body>
+</html>

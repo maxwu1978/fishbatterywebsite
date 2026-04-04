@@ -29,10 +29,10 @@
         "20Ah",
         "296Wh",
         "IP65",
-        "2-year warranty",
+        "1-year warranty",
         "weight"
       ],
-      "content": "Key headline specifications presented on the site include 20Ah capacity, 296Wh battery energy, IP65 outdoor protection, and a 2-year warranty. The product is also described as approximately 1.65kg for easier boat movement."
+      "content": "Key headline specifications presented on the site include 20Ah capacity, 296Wh battery energy, IP65 outdoor protection, and a 1-year warranty. The product is also described as approximately 1.65kg for easier boat movement."
     },
     {
       "id": "compatibility-positioning",
@@ -43,10 +43,9 @@
         "DAIWA",
         "SHIMANO",
         "electric reels",
-        "connector type",
         "reel model"
       ],
-      "content": "Reel Mate is positioned for common DAIWA and SHIMANO electric reel applications. Final compatibility should be confirmed by reel model, connector type, voltage, and intended use before payment if the buyer is unsure."
+      "content": "Reel Mate is positioned for common DAIWA and SHIMANO electric reel applications. If the voltage matches the setup, buyers can move ahead with confidence and contact support if they still want a manual review."
     },
     {
       "id": "full-kit-contents",
@@ -58,10 +57,9 @@
         "charger",
         "cable",
         "protective case",
-        "shoulder strap",
-        "carrying bag"
+        "manual"
       ],
-      "content": "The full kit includes the battery unit, charger set, output cable set, protective case, shoulder strap, and carrying bag. The product is presented as a ready-to-use offshore power kit rather than a battery-only listing."
+      "content": "The full kit includes the battery, protective case, charger, cable set, and manual. The product is presented as a ready-to-use offshore power kit rather than a battery-only listing."
     },
     {
       "id": "pricing",
@@ -82,11 +80,11 @@
       "keywords": [
         "payment",
         "card",
-        "paypal",
+        "stripe",
         "checkout",
         "secure payment"
       ],
-      "content": "The checkout structure supports card payment, PayPal, and a guided secure order review step. Card payment is positioned as the fastest route, while PayPal is also available for supported buyers in the United States and EU."
+      "content": "The payment flow supports secure Stripe card checkout and a guided order-support step. Buyers who need another payment method should contact support before ordering."
     },
     {
       "id": "checkout-destinations",
@@ -99,7 +97,7 @@
         "supported countries",
         "unsupported region"
       ],
-      "content": "Sales are currently limited to the United States and EU countries. The payment and checkout flow should not be offered to unsupported regions."
+      "content": "Sales are currently limited to the United States and EU countries. Online card checkout should not be offered to unsupported regions."
     },
     {
       "id": "shipping-guidance",
@@ -113,7 +111,7 @@
         "US",
         "EU"
       ],
-      "content": "Before payment, buyers can confirm destination country, quantity, and any special shipping details. Reel Mate currently ships only to the United States and EU countries, and recommends reviewing destination and order scope before final checkout."
+      "content": "Before payment, buyers can confirm destination country, quantity, and any special shipping details. Reel Mate currently ships only to the United States and EU countries, and confirms shipping with the logistics provider before dispatch."
     },
     {
       "id": "warranty-coverage",
@@ -121,11 +119,11 @@
       "title": "Warranty coverage",
       "keywords": [
         "warranty",
-        "2 years",
+        "1 year",
         "coverage",
         "intended use"
       ],
-      "content": "Reel Mate includes 2-year warranty support for normal intended offshore and boat-fishing use. Buyers are encouraged to confirm fit and intended application before ordering if anything is unclear."
+      "content": "Reel Mate includes 1-year warranty support for normal intended offshore and boat-fishing use, with a 72-hour reply and initial assessment target."
     },
     {
       "id": "returns-process",
@@ -137,7 +135,7 @@
         "support",
         "order issue"
       ],
-      "content": "Reel Mate uses a support-first review process rather than a fully automated return portal. Buyers should confirm compatibility and shipping details before payment, and contact support directly with order details if an issue needs review."
+      "content": "Reel Mate uses a support-first review process rather than a fully automated return portal. Shipment is confirmed with the logistics provider before dispatch, and if shipment is not possible a refund is issued."
     },
     {
       "id": "brand-story",
@@ -177,7 +175,7 @@
         "shipping help",
         "payment help"
       ],
-      "content": "The support experience is designed to answer questions about compatibility, shipping, payment methods, warranty, and kit contents before checkout. It should guide the buyer clearly and escalate when confidence is low."
+      "content": "The support experience is designed to answer questions about voltage match, shipping, payment methods, warranty, and kit contents before payment. It should guide the buyer clearly and escalate when confidence is low."
     },
     {
       "id": "product-sheet-summary",

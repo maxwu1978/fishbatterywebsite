@@ -6,11 +6,11 @@
     <title>Buy Reel Mate | Solaris Marine Checkout</title>
     <meta
       name="description"
-      content="Reel Mate direct-order guide with shipping, customer details, payment-method review, and a high-contrast order summary."
+      content="Reel Mate direct-order guide with live Stripe card checkout, shipping details, and a high-contrast order summary."
     />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://client.crisp.chat; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://client.crisp.chat; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://www.youtube.com; connect-src 'self' https://client.crisp.chat wss://client.relay.crisp.chat" />
     <meta property="og:title" content="Buy Reel Mate | Solaris Marine Checkout" />
-    <meta property="og:description" content="Reel Mate direct-order guide for ordering the portable fishing battery." />
+    <meta property="og:description" content="Reel Mate direct-order guide with live Stripe card checkout." />
     <meta property="og:type" content="website" />
     <link rel="canonical" href="https://www.getreelmate.com/payment.html" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -43,23 +43,34 @@
     <main class="subpage-main payment-main solar-main">
       <section class="solar-intro glass-card">
         <div>
-          <p class="eyebrow">Solaris Marine Order Guide</p>
-          <h1>Sunny Beach Tech Direct Order Flow for Reel Mate</h1>
+          <p class="eyebrow">Solaris Marine Card Checkout</p>
+          <h1>Secure Stripe Card Payment for Reel Mate</h1>
           <p class="hero-text">
-            Review your direct order with a brighter, beach-inspired order flow.
-            Shipping, customer details, and payment-method review stay on the left,
-            while the order summary and trust details remain fixed on the right.
+            Complete your order with live Stripe card checkout. Customer details,
+            shipping review, and payment choice stay on the left, while the
+            order summary remains fixed on the right.
           </p>
           <p class="payment-region-note">
             Sales are currently limited to the United States and EU countries.
           </p>
         </div>
         <div class="payment-badges">
-          <span>Card Payment</span>
-          <span>PayPal</span>
+          <span>Stripe Card Checkout</span>
+          <span>USD</span>
           <span>US + EU Only</span>
-          <span>High Contrast UI</span>
+          <span>24-Hour Support</span>
         </div>
+      </section>
+
+      <section class="glass-card" style="margin-bottom:1.5rem;">
+        <p class="eyebrow">Before You Pay</p>
+        <h2 style="margin-bottom:0.8rem;">Live card checkout is active</h2>
+        <p style="margin:0;color:#36556c;">
+          Online payment is now handled through Stripe card checkout. If you want
+          another payment method or need a manual review before paying, use the
+          support page instead.
+        </p>
+        <div id="payment-status" style="display:none;margin-top:1rem;padding:0.9rem 1rem;border-radius:14px;font-weight:600;"></div>
       </section>
 
       <section class="checkout-shell">
@@ -85,7 +96,7 @@
                 <span>3</span>
                 <div>
                   <strong>Payment</strong>
-                <small>Review card or PayPal as payment options</small>
+                <small>Pay by card or switch to manual order support</small>
                 </div>
               </div>
             </div>
@@ -94,58 +105,76 @@
           <article class="glass-card checkout-form-card">
             <p class="eyebrow">Customer Info</p>
             <h2>Customer Details</h2>
-            <form class="checkout-form" action="#">
+            <form class="checkout-form" id="checkout-form" action="#">
               <div class="checkout-grid">
                 <label>
                   First Name
-                  <input type="text" placeholder="Alex" />
+                  <input id="first-name" type="text" placeholder="Alex" required />
                 </label>
                 <label>
                   Last Name
-                  <input type="text" placeholder="Morgan" />
+                  <input id="last-name" type="text" placeholder="Morgan" required />
                 </label>
                 <label>
                   Email
-                  <input type="email" placeholder="alex@example.com" />
+                  <input id="email" type="email" placeholder="alex@example.com" required />
                 </label>
                 <label>
                   Phone
-                  <input type="tel" placeholder="+1 555 000 0000" />
+                  <input id="phone" type="tel" placeholder="+1 555 000 0000" />
                 </label>
                 <label>
                   Country / Region
-                  <select>
-                    <option>United States</option>
-                    <option>Germany</option>
-                    <option>France</option>
-                    <option>Spain</option>
-                    <option>Italy</option>
-                    <option>Netherlands</option>
-                    <option>Other EU Country</option>
+                  <select id="country" required>
+                    <option value="US">United States</option>
+                    <option value="DE">Germany</option>
+                    <option value="FR">France</option>
+                    <option value="ES">Spain</option>
+                    <option value="IT">Italy</option>
+                    <option value="NL">Netherlands</option>
+                    <option value="BE">Belgium</option>
+                    <option value="AT">Austria</option>
+                    <option value="IE">Ireland</option>
+                    <option value="PT">Portugal</option>
+                    <option value="SE">Sweden</option>
+                    <option value="DK">Denmark</option>
+                    <option value="FI">Finland</option>
+                    <option value="PL">Poland</option>
+                    <option value="CZ">Czech Republic</option>
+                    <option value="HU">Hungary</option>
+                    <option value="RO">Romania</option>
+                    <option value="GR">Greece</option>
+                    <option value="HR">Croatia</option>
+                    <option value="SK">Slovakia</option>
+                    <option value="SI">Slovenia</option>
+                    <option value="LT">Lithuania</option>
+                    <option value="LV">Latvia</option>
+                    <option value="EE">Estonia</option>
+                    <option value="LU">Luxembourg</option>
+                    <option value="BG">Bulgaria</option>
                   </select>
                 </label>
                 <label>
                   Currency
-                  <select>
-                    <option>USD</option>
-                    <option>EUR</option>
+                  <select id="currency">
+                    <option value="usd">USD</option>
                   </select>
                 </label>
                 <label class="checkout-field-wide">
                   Shipping Address
-                  <input type="text" placeholder="Street address" />
+                  <input id="shipping-address" type="text" placeholder="Street address" required />
                 </label>
                 <label>
                   City
-                  <input type="text" placeholder="City" />
+                  <input id="city" type="text" placeholder="City" required />
                 </label>
                 <label>
                   Postal Code
-                  <input type="text" placeholder="Postal code" />
+                  <input id="postal-code" type="text" placeholder="Postal code" required />
                 </label>
                 <label class="checkout-field-wide">
                   Reel Model
-                  <input type="text" placeholder="Example: SHIMANO Beastmaster 3000" />
+                  <input id="reel-model" type="text" placeholder="Example: SHIMANO Beastmaster 3000" required />
                 </label>
               </div>
             </form>
@@ -179,19 +208,14 @@
             <h2>Choose a Payment Method</h2>
             <div class="checkout-payment-grid">
               <label class="payment-choice payment-choice-active">
-                <input type="radio" name="payment-choice" checked />
-                <strong>Card Payment</strong>
-                <span>Visa, Mastercard, and direct card payment</span>
+                <input type="radio" name="payment-choice" value="card" checked />
+                <strong>Card Checkout</strong>
+                <span>Visa and Mastercard via secure Stripe checkout</span>
               </label>
               <label class="payment-choice">
-                <input type="radio" name="payment-choice" />
-                <strong>PayPal</strong>
-                <span>Quick payment option for supported US and EU buyers</span>
-              </label>
-              <label class="payment-choice">
-                <input type="radio" name="payment-choice" />
+                <input type="radio" name="payment-choice" value="support" />
                 <strong>Secure Order Review</strong>
-                <span>Use a guided final review step before the payment link is issued</span>
+                <span>Use support if you need manual payment help before ordering</span>
               </label>
             </div>
           </article>
@@ -220,7 +244,8 @@
               <strong>US$699</strong>
             </div>
 
-            <a class="checkout-cta" href="contact.html">Request Order Support</a>
+            <button class="checkout-cta" id="start-payment" type="button">Pay US$699 by Card</button>
+            <a class="button button-secondary button-dark" style="margin-top:0.9rem;width:100%;display:inline-flex;justify-content:center;" href="contact.html">Need Manual Support?</a>
 
             <div class="trust-badges">
               <span>24-hour reply target</span>
@@ -257,5 +282,124 @@
     </footer>
     <script src="chat-config.js"></script>
     <script src="support-chat.js"></script>
+    <script>
+      (function () {
+        const startButton = document.getElementById("start-payment");
+        const statusBox = document.getElementById("payment-status");
+        const countrySelect = document.getElementById("country");
+        const currencySelect = document.getElementById("currency");
+        const paymentChoices = Array.from(document.querySelectorAll('input[name="payment-choice"]'));
+        const labels = Array.from(document.querySelectorAll(".payment-choice"));
+
+        function activeChoice() {
+          return paymentChoices.find((input) => input.checked)?.value || "card";
+        }
+
+        function setStatus(message, tone) {
+          const palette = {
+            info: { bg: "rgba(24, 82, 137, 0.12)", border: "rgba(24, 82, 137, 0.35)", color: "#184a7d" },
+            success: { bg: "rgba(18, 117, 67, 0.12)", border: "rgba(18, 117, 67, 0.35)", color: "#0d5d36" },
+            error: { bg: "rgba(166, 48, 48, 0.12)", border: "rgba(166, 48, 48, 0.35)", color: "#8a2222" }
+          };
+          const style = palette[tone] || palette.info;
+          statusBox.style.display = "block";
+          statusBox.style.background = style.bg;
+          statusBox.style.border = `1px solid ${style.border}`;
+          statusBox.style.color = style.color;
+          statusBox.textContent = message;
+        }
+
+        function formData() {
+          return {
+            firstName: document.getElementById("first-name").value.trim(),
+            lastName: document.getElementById("last-name").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            phone: document.getElementById("phone").value.trim(),
+            country: countrySelect.value,
+            countryLabel: countrySelect.options[countrySelect.selectedIndex].text,
+            currency: currencySelect.value,
+            shippingAddress: document.getElementById("shipping-address").value.trim(),
+            city: document.getElementById("city").value.trim(),
+            postalCode: document.getElementById("postal-code").value.trim(),
+            reelModel: document.getElementById("reel-model").value.trim()
+          };
+        }
+
+        function validate(data) {
+          const requiredFields = [
+            ["First name", data.firstName],
+            ["Last name", data.lastName],
+            ["Email", data.email],
+            ["Shipping address", data.shippingAddress],
+            ["City", data.city],
+            ["Postal code", data.postalCode],
+            ["Reel model", data.reelModel]
+          ];
+
+          const missing = requiredFields.find(([, value]) => !value);
+          if (missing) {
+            setStatus(`${missing[0]} is required before payment.`, "error");
+            return false;
+          }
+          return true;
+        }
+
+        function syncChoices() {
+          labels.forEach((label) => {
+            const input = label.querySelector('input[name="payment-choice"]');
+            label.classList.toggle("payment-choice-active", input.checked);
+          });
+        }
+
+        paymentChoices.forEach((input) => {
+          input.addEventListener("change", syncChoices);
+        });
+
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("status") === "success") {
+          setStatus("Payment completed. Check your email for the Stripe receipt and order confirmation follow-up.", "success");
+        } else if (params.get("status") === "cancelled") {
+          setStatus("Payment was cancelled. You can review your details and try again when ready.", "info");
+        }
+
+        startButton.addEventListener("click", async () => {
+          if (activeChoice() === "support") {
+            window.location.href = "contact.html";
+            return;
+          }
+
+          const data = formData();
+          if (!validate(data)) {
+            return;
+          }
+
+          startButton.disabled = true;
+          startButton.textContent = "Preparing secure checkout...";
+          setStatus("Creating your secure Stripe checkout session...", "info");
+
+          try {
+            const response = await fetch("/api/create-checkout-session", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok || !result.url) {
+              throw new Error(result.error || "Unable to start checkout right now.");
+            }
+
+            window.location.href = result.url;
+          } catch (error) {
+            setStatus(error.message || "Unable to start checkout right now.", "error");
+            startButton.disabled = false;
+            startButton.textContent = "Pay US$699 by Card";
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

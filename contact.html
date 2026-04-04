@@ -160,7 +160,7 @@
 
             <label class="support-note-field">
               Extra details
-              <textarea id="support-note" rows="4" placeholder="Optional: add your reel model or a short note, such as Beastmaster 3000, Spain delivery, PayPal preferred."></textarea>
+              <textarea id="support-note" rows="4" placeholder="Optional: add your reel model or a short note, such as Beastmaster 3000, Spain delivery, card payment preferred."></textarea>
             </label>
 
             <div class="support-actions-row">
@@ -220,8 +220,8 @@
               : `Shipping support is available for ${country}. Before payment, confirm destination details and any special delivery note. ${note ? `Current note received: ${note}. ` : ""}The current sales scope covers the United States and EU countries only.`,
           payment: ({ country }) =>
             country === "Unsupported Region"
-              ? `Card and PayPal payment options are currently offered only for buyers in the United States and EU countries.`
-              : `For buyers in ${country}, the current direct-order flow supports card payment, PayPal, and a guided payment-support step. Card payment is the fastest path, and PayPal is also available for supported buyers in the United States and EU.`,
+              ? `Online card payment is currently offered only for buyers in the United States and EU countries.`
+              : `For buyers in ${country}, the current direct-order flow supports secure card payment and a guided payment-support step. If you need another payment method, contact support before ordering.`,
           included: () =>
             `The full kit includes the battery, protective case, charger, cable set, and manual. The listed retail price is US$699 for the complete ready-to-use setup.`,
           warranty: () =>

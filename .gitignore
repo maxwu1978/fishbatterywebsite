@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 server/inquiries.json
 .vercel
+node_modules
+.env*
