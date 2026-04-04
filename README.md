@@ -101,6 +101,21 @@ use the protected internal order-records endpoint and page:
 Both require the internal `ORDER_RECORDS_TOKEN` value via the `x-order-token`
 header or the token field on `orders.html`.
 
+## Inquiry notifications
+
+The site also includes a Vercel form endpoint at `api/inquiry.js` for the
+support form on the homepage and the wholesale request form.
+
+Optional environment variable:
+
+```bash
+INQUIRY_WEBHOOK_URL=https://hooks.example.com/your-channel
+```
+
+If `INQUIRY_WEBHOOK_URL` is set, each new inquiry is forwarded as JSON to that
+webhook. If it is not set, the inquiry still succeeds and is written to Vercel
+runtime logs with the `site_inquiry_received` event name.
+
 ## Deployment
 
 The site is deployed on Vercel with `www.getreelmate.com` as the primary domain.
