@@ -3,3 +3,4 @@ deploy-preview/
 __pycache__/
 *.pyc
 server/inquiries.json
+.vercel

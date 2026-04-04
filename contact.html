@@ -6,13 +6,13 @@
     <title>Contact Reel Mate | Customer Support</title>
     <meta
       name="description"
-      content="Contact Reel Mate customer support for product details, compatibility questions, shipping help, and payment clarification."
+      content="Contact Reel Mate customer support for product details, shipping help, included accessories, and a 24-hour reply target."
     />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://client.crisp.chat; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://client.crisp.chat; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://www.youtube.com; connect-src 'self' https://client.crisp.chat wss://client.relay.crisp.chat" />
     <meta property="og:title" content="Contact Reel Mate | Customer Support" />
-    <meta property="og:description" content="Contact Reel Mate customer support for product details, compatibility questions, shipping help, and payment clarification." />
+    <meta property="og:description" content="Contact Reel Mate customer support with a 24-hour reply target for shipping and product questions." />
     <meta property="og:type" content="website" />
-    <link rel="canonical" href="https://maxwu1978.github.io/fishbatterywebsite/contact.html" />
+    <link rel="canonical" href="https://www.getreelmate.com/contact.html" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -45,12 +45,12 @@
       <section class="subpage-hero">
         <div>
           <p class="eyebrow">Live Support</p>
-          <h1>Crisp-Ready Support for Compatibility, Shipping, and Payment Questions</h1>
+          <h1>Crisp-Ready Support for Voltage Match, Shipping, and Payment Questions</h1>
           <p class="hero-text">
-            Use the support console below for instant guidance before checkout.
+            Use the support console below for instant guidance before payment.
             You can tap common topics, choose your country, and get immediate
-            answers about compatibility, shipping, payment methods, and what is
-            included in the kit.
+            answers about voltage match, shipping, payment methods, and what is
+            included in the kit. Human support targets replies within 24 hours.
           </p>
           <p class="support-region-note">
             Current supported sales regions: United States and EU countries only.
@@ -61,7 +61,7 @@
           <ul>
             <li>Crisp is the recommended sitewide live chat provider</li>
             <li>Fast fit and shipping answers for US and EU buyers</li>
-            <li>Good match for premium retail support and checkout help</li>
+            <li>Good match for premium retail support and order help</li>
             <li>Current console stays useful until live chat is enabled</li>
           </ul>
         </div>
@@ -70,7 +70,7 @@
       <section class="subpage-visuals">
         <figure class="subpage-visual-card">
           <img src="资料/new imaage/c1ec84332049dec59539c7a6fe4f58fa.jpg" alt="Battery with protective case, carrying bag, and shoulder strap" />
-          <figcaption>Use this support page to clarify fit, shipping, payment methods, and included accessories before checkout.</figcaption>
+          <figcaption>Use this support page to clarify fit, shipping, payment methods, and included accessories before payment.</figcaption>
         </figure>
         <figure class="subpage-visual-card">
           <img src="资料/new imaage/f4e1986247ebbc29a723c2f84b759bb3.jpg" alt="Battery status display shown during fishing use onboard" />
@@ -90,13 +90,13 @@
             </p>
             <div class="subpage-points">
               <div>Instant guidance for reel fit questions</div>
-              <div>Card and PayPal checkout support</div>
+              <div>24-hour reply target from support</div>
               <div>Crisp-ready for sitewide live support rollout</div>
             </div>
           </div>
 
           <div class="support-shortcuts">
-            <button class="support-chip is-active" type="button" data-support-topic="compatibility">Compatibility</button>
+            <button class="support-chip is-active" type="button" data-support-topic="compatibility">Voltage Match</button>
             <button class="support-chip" type="button" data-support-topic="shipping">Shipping</button>
             <button class="support-chip" type="button" data-support-topic="payment">Payment Methods</button>
             <button class="support-chip" type="button" data-support-topic="included">What's Included</button>
@@ -121,7 +121,7 @@
               <p class="support-author">Reel Mate Support</p>
               <div class="support-bubble">
                 Welcome. Choose a topic below and I will instantly guide you on
-                compatibility, shipping, payment methods, or
+                voltage match, shipping, payment methods, or
                 what is included in the full kit.
               </div>
             </article>
@@ -153,7 +153,7 @@
             </div>
 
             <div class="support-quick-actions">
-              <button class="support-action" type="button" data-support-topic="compatibility">Check compatibility</button>
+              <button class="support-action" type="button" data-support-topic="compatibility">Check voltage match</button>
               <button class="support-action" type="button" data-support-topic="shipping">Check shipping</button>
               <button class="support-action" type="button" data-support-topic="payment">See payment methods</button>
             </div>
@@ -202,7 +202,7 @@
         let activeTopic = "compatibility";
 
         const topicTitles = {
-          compatibility: "Compatibility",
+          compatibility: "Voltage Match",
           shipping: "Shipping",
           payment: "Payment Methods",
           included: "What's Included",
@@ -212,20 +212,20 @@
         const fallbackResponses = {
           compatibility: ({ country, brand, note }) =>
             country === "Unsupported Region"
-              ? `Sales are currently limited to the United States and EU countries. If you are outside those regions, checkout is not available yet.`
-              : `For ${brand} setups in ${country}, Reel Mate is positioned for common electric reel applications. Before payment, confirm your exact reel model, connector type, and intended fishing use. ${note ? `Based on your note, pay extra attention to: ${note}. ` : ""}If you are ready, continue to the payment page after confirming those details.`,
+              ? `Sales are currently limited to the United States and EU countries. If you are outside those regions, direct ordering is not available yet.`
+              : `For ${brand} setups in ${country}, Reel Mate is positioned for common electric reel applications. If the voltage matches your setup, you can move ahead with confidence. ${note ? `Based on your note, pay extra attention to: ${note}. ` : ""}If you want human help, support targets replies within 24 hours.`,
           shipping: ({ country, note }) =>
             country === "Unsupported Region"
-              ? `Sales are currently limited to the United States and EU countries. If your destination is outside those regions, checkout is not yet available.`
-              : `Shipping support is available for ${country}. Before checkout, confirm destination details and any special delivery note. ${note ? `Current note received: ${note}. ` : ""}The current sales scope covers the United States and EU countries only.`,
+              ? `Sales are currently limited to the United States and EU countries. If your destination is outside those regions, direct ordering is not yet available.`
+              : `Shipping support is available for ${country}. Before payment, confirm destination details and any special delivery note. ${note ? `Current note received: ${note}. ` : ""}The current sales scope covers the United States and EU countries only.`,
           payment: ({ country }) =>
             country === "Unsupported Region"
-              ? `Card and PayPal checkout are currently offered only for buyers in the United States and EU countries.`
-              : `For buyers in ${country}, the current checkout structure supports card payment, PayPal, and a guided payment-support step. Card payment is the fastest path, and PayPal is also available for supported buyers in the United States and EU.`,
+              ? `Card and PayPal payment options are currently offered only for buyers in the United States and EU countries.`
+              : `For buyers in ${country}, the current direct-order flow supports card payment, PayPal, and a guided payment-support step. Card payment is the fastest path, and PayPal is also available for supported buyers in the United States and EU.`,
           included: () =>
-            `The full kit includes the battery unit, charger set, output cable set, protective case, shoulder strap, and carrying bag. The listed retail price is US$699 for the complete ready-to-use setup.`,
+            `The full kit includes the battery, protective case, charger, cable set, and manual. The listed retail price is US$699 for the complete ready-to-use setup.`,
           warranty: () =>
-            `Reel Mate includes 2-year warranty support for normal intended use. You can also review the warranty and returns pages before payment if you want a more complete policy check.`
+            `Reel Mate includes 1-year warranty support for normal intended use. You can also review the warranty and returns pages before payment if you want a more complete policy check.`
         };
 
         function setActiveTopic(topic) {

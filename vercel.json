@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "getreelmate.com"
+        }
+      ],
+      "destination": "https://www.getreelmate.com/:path*",
+      "permanent": true
+    }
+  ]
+}
