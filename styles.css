@@ -1745,11 +1745,31 @@ h3 {
 
 .payment-choice {
   grid-template-columns: 20px 1fr;
+  align-items: start;
 }
 
 .shipping-option input,
 .payment-choice input {
   accent-color: #ffd700;
+}
+
+.payment-choice input {
+  margin-top: 0.18rem;
+}
+
+.payment-choice strong,
+.payment-choice span {
+  grid-column: 2;
+}
+
+.payment-choice strong {
+  line-height: 1.2;
+}
+
+.payment-choice span {
+  display: block;
+  margin-top: 0.4rem;
+  line-height: 1.45;
 }
 
 .shipping-option em {

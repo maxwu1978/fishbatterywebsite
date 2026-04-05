@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>注文案内 | Reel Mate 日本語ページ</title>
+    <title>Reel Mate 注文ページ | Stripeカード決済</title>
     <meta
       name="description"
-      content="Reel Mate フルキットの価格、注文の流れ、支払い前に確認できる内容を日本語で案内します。"
+      content="Reel Mate の日本語注文ページ。Stripeカード決済、配送先入力、注文内容確認を日本語で進められます。"
     />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://client.crisp.chat; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://client.crisp.chat; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://www.youtube.com; connect-src 'self' https://client.crisp.chat wss://client.relay.crisp.chat" />
-    <meta property="og:title" content="注文案内 | Reel Mate 日本語ページ" />
-    <meta property="og:description" content="価格、注文の流れ、支払い前確認事項を日本語で案内。" />
+    <meta property="og:title" content="Reel Mate 注文ページ | Stripeカード決済" />
+    <meta property="og:description" content="日本語で進められる Reel Mate の Stripe カード決済ページ。" />
     <meta property="og:type" content="website" />
     <link rel="canonical" href="https://www.getreelmate.com/ja-payment.html" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -26,108 +26,195 @@
     <header class="site-header">
       <a class="brand" href="ja.html">
         <img class="brand-logo" src="reel-mate-simple-light.svg" alt="Reel Mate" />
-        <span class="brand-sub">Portable Offshore Power</span>
+        <span class="brand-sub">電動リール向けポータブル電源</span>
       </a>
       <nav class="site-nav">
-        <a href="index.html">English</a>
+        <a href="index.html">英語</a>
         <a href="ja.html">日本語</a>
         <a href="ja-compatibility.html">適合確認</a>
-        <a href="ja-payment.html">注文案内</a>
+        <a href="ja-payment.html">注文</a>
         <a href="ja-contact.html">お問い合わせ</a>
         <a href="ja-shipping.html">配送</a>
         <a href="ja-warranty.html">保証</a>
         <a href="ja-returns.html">返品</a>
       </nav>
-      <a class="button button-small" href="product-sheet.pdf">Product Sheet</a>
+      <a class="button button-small" href="product-sheet.pdf">製品資料</a>
     </header>
 
     <main class="subpage-main payment-main solar-main">
       <section class="solar-intro glass-card">
         <div>
-          <p class="eyebrow">日本語注文案内</p>
-          <h1>価格と注文の流れ</h1>
+          <p class="eyebrow">日本語カード決済</p>
+          <h1>Reel Mate の注文を日本語で進める</h1>
           <p class="hero-text">
-            Reel Mate のフルキット価格、確認事項、注文前の相談ポイントを日本語でまとめています。
-            現時点では、支払い前に適合や配送条件を確認しやすい案内方式です。
+            Stripe によるカード決済でそのまま注文できます。配送先、購入者情報、
+            リール情報を入力したうえで、安全なチェックアウトに進みます。
           </p>
           <p class="payment-region-note">
-            現在の販売対象地域は、アメリカおよび EU 諸国が中心です。
+            現在の販売対象は、アメリカおよび EU 諸国です。
           </p>
         </div>
         <div class="payment-badges">
+          <span>Stripeカード決済</span>
           <span>US$699</span>
-          <span>フルキット</span>
-          <span>事前確認可能</span>
-          <span>日本語案内あり</span>
+          <span>アメリカ + EU</span>
+          <span>24時間以内返信目標</span>
         </div>
+      </section>
+
+      <section class="glass-card" style="margin-bottom:1.5rem;">
+        <p class="eyebrow">お支払い前に</p>
+        <h2 style="margin-bottom:0.8rem;">オンラインカード決済が利用できます</h2>
+        <p style="margin:0;color:#36556c;">
+          現在は Stripe のカード決済が利用可能です。支払い前に確認したいことがある場合や、
+          個別対応を希望する場合は、日本語お問い合わせページから先に相談できます。
+        </p>
+        <div id="payment-status" style="display:none;margin-top:1rem;padding:0.9rem 1rem;border-radius:14px;font-weight:600;"></div>
       </section>
 
       <section class="checkout-shell">
         <div class="checkout-left">
           <article class="glass-card checkout-stepper-card">
-            <p class="eyebrow">ステップ</p>
+            <p class="eyebrow">手順</p>
             <div class="checkout-stepper">
               <div class="checkout-step is-active">
                 <span>1</span>
                 <div>
-                  <strong>適合確認</strong>
-                  <small>型番・電圧情報・用途を共有</small>
+                  <strong>配送先</strong>
+                  <small>アメリカまたは EU の配送先を選択</small>
                 </div>
               </div>
               <div class="checkout-step is-active">
                 <span>2</span>
                 <div>
-                  <strong>配送確認</strong>
-                  <small>配送先と発送条件を確認</small>
+                  <strong>購入者情報</strong>
+                  <small>氏名とリール情報を入力</small>
                 </div>
               </div>
               <div class="checkout-step">
                 <span>3</span>
                 <div>
-                  <strong>注文案内</strong>
-                  <small>内容確認後に支払い案内</small>
+                  <strong>決済</strong>
+                  <small>カードで支払うか、日本語サポートに進む</small>
                 </div>
               </div>
             </div>
           </article>
 
           <article class="glass-card checkout-form-card">
-            <p class="eyebrow">価格</p>
-            <h2>フルキット価格</h2>
-            <div class="summary-breakdown">
-              <div><span>フルキット</span><strong>US$699</strong></div>
-              <div><span>事前相談</span><strong>対応可能</strong></div>
-              <div><span>保証</span><strong>1 Year</strong></div>
-            </div>
-            <p style="margin-top:1rem;">
-              価格以外に、電圧条件、配送条件、支払い方法、同梱内容を確認しておくと安心です。
-            </p>
+            <p class="eyebrow">購入者情報</p>
+            <h2>ご注文情報</h2>
+            <form class="checkout-form" id="checkout-form" action="#">
+              <div class="checkout-grid">
+                <label>
+                  名
+                  <input id="first-name" type="text" placeholder="Taro" required />
+                </label>
+                <label>
+                  姓
+                  <input id="last-name" type="text" placeholder="Yamada" required />
+                </label>
+                <label>
+                  メールアドレス
+                  <input id="email" type="email" placeholder="name@example.com" required />
+                </label>
+                <label>
+                  電話番号
+                  <input id="phone" type="tel" placeholder="+81 90 1234 5678" />
+                </label>
+                <label>
+                  国 / 地域
+                  <select id="country" required>
+                    <option value="US">アメリカ合衆国</option>
+                    <option value="DE">ドイツ</option>
+                    <option value="FR">フランス</option>
+                    <option value="ES">スペイン</option>
+                    <option value="IT">イタリア</option>
+                    <option value="NL">オランダ</option>
+                    <option value="BE">ベルギー</option>
+                    <option value="AT">オーストリア</option>
+                    <option value="IE">アイルランド</option>
+                    <option value="PT">ポルトガル</option>
+                    <option value="SE">スウェーデン</option>
+                    <option value="DK">デンマーク</option>
+                    <option value="FI">フィンランド</option>
+                    <option value="PL">ポーランド</option>
+                    <option value="CZ">チェコ</option>
+                    <option value="HU">ハンガリー</option>
+                    <option value="RO">ルーマニア</option>
+                    <option value="GR">ギリシャ</option>
+                    <option value="HR">クロアチア</option>
+                    <option value="SK">スロバキア</option>
+                    <option value="SI">スロベニア</option>
+                    <option value="LT">リトアニア</option>
+                    <option value="LV">ラトビア</option>
+                    <option value="EE">エストニア</option>
+                    <option value="LU">ルクセンブルク</option>
+                    <option value="BG">ブルガリア</option>
+                  </select>
+                </label>
+                <label>
+                  通貨
+                  <select id="currency">
+                    <option value="usd">USD</option>
+                  </select>
+                </label>
+                <label class="checkout-field-wide">
+                  配送先住所
+                  <input id="shipping-address" type="text" placeholder="番地・通り名など" required />
+                </label>
+                <label>
+                  市区町村
+                  <input id="city" type="text" placeholder="市区町村" required />
+                </label>
+                <label>
+                  郵便番号
+                  <input id="postal-code" type="text" placeholder="郵便番号" required />
+                </label>
+                <label class="checkout-field-wide">
+                  リール型番
+                  <input id="reel-model" type="text" placeholder="例: SHIMANO Beastmaster 3000" required />
+                </label>
+              </div>
+            </form>
           </article>
 
           <article class="glass-card checkout-shipping-card">
-            <p class="eyebrow">注文前チェック</p>
-            <h2>確認しておきたい内容</h2>
+            <p class="eyebrow">配送方法</p>
+            <h2>配送の進め方</h2>
             <div class="shipping-options">
               <label class="shipping-option shipping-option-active">
+                <input type="radio" name="shipping-method" checked />
                 <div>
-                  <strong>使用条件</strong>
-                  <span>使用予定の型番と電圧情報</span>
+                  <strong>通常配送確認</strong>
+                  <span>アメリカ / EU 向け注文の標準フローです</span>
                 </div>
-                <em>重要</em>
+                <em>標準</em>
               </label>
-              <label class="shipping-option shipping-option-active">
+              <label class="shipping-option">
+                <input type="radio" name="shipping-method" />
                 <div>
-                  <strong>配送先</strong>
-                  <span>国・地域・希望条件</span>
+                  <strong>優先対応相談</strong>
+                  <span>急ぎの場合は先にお問い合わせください</span>
                 </div>
-                <em>重要</em>
+                <em>要相談</em>
               </label>
-              <label class="shipping-option shipping-option-active">
-                <div>
-                  <strong>支払い方法</strong>
-                  <span>カード、PayPal、その他確認事項</span>
-                </div>
-                <em>確認可</em>
+            </div>
+          </article>
+
+          <article class="glass-card checkout-payment-card">
+            <p class="eyebrow">決済方法</p>
+            <h2>支払い方法を選択</h2>
+            <div class="checkout-payment-grid">
+              <label class="payment-choice payment-choice-active">
+                <input type="radio" name="payment-choice" value="card" checked />
+                <strong>カード決済</strong>
+                <span>Visa / Mastercard に対応した Stripe の安全なチェックアウト</span>
+              </label>
+              <label class="payment-choice">
+                <input type="radio" name="payment-choice" value="support" />
+                <strong>注文前サポート</strong>
+                <span>個別確認や支払い前の相談が必要な場合は日本語サポートへ</span>
               </label>
             </div>
           </article>
@@ -135,8 +222,8 @@
 
         <aside class="checkout-right">
           <article class="glass-card order-summary-card">
-            <p class="eyebrow">内容まとめ</p>
-            <h2>Reel Mate Full Kit</h2>
+            <p class="eyebrow">注文内容</p>
+            <h2>Reel Mate フルキット</h2>
             <div class="summary-product">
               <img src="资料/new imaage/cover.jpg" alt="Reel Mate battery kit" />
               <div>
@@ -146,42 +233,171 @@
             </div>
 
             <div class="summary-breakdown">
-              <div><span>価格</span><strong>US$699</strong></div>
-              <div><span>配送条件確認</span><strong>注文前に確認</strong></div>
-              <div><span>保証</span><strong>1 Year</strong></div>
+              <div><span>フルキット</span><strong>US$699</strong></div>
+              <div><span>配送確認</span><strong>含まれます</strong></div>
+              <div><span>保証</span><strong>1年間</strong></div>
             </div>
 
-            <a class="checkout-cta" href="ja-contact.html">日本語で問い合わせる</a>
+            <div class="summary-total">
+              <span>合計</span>
+              <strong>US$699</strong>
+            </div>
+
+            <button class="checkout-cta" id="start-payment" type="button">US$699 をカードで支払う</button>
+            <a class="button button-secondary button-dark" style="margin-top:0.9rem;width:100%;display:inline-flex;justify-content:center;" href="ja-contact.html">日本語で相談する</a>
 
             <div class="trust-badges">
-              <span>型番確認対応</span>
-              <span>配送条件確認可</span>
-              <span>支払い前相談可</span>
-              <span>フルキット構成</span>
+              <span>24時間以内返信目標</span>
+              <span>アメリカ + EU のみ</span>
+              <span>電圧条件確認可</span>
+              <span>フルキット同梱</span>
             </div>
 
             <div class="summary-links">
-              <a href="ja-shipping.html">配送案内</a>
+              <a href="ja-shipping.html">配送</a>
               <a href="ja-warranty.html">保証</a>
-              <a href="ja-returns.html">返品・返金</a>
+              <a href="ja-returns.html">返品</a>
             </div>
           </article>
         </aside>
       </section>
     </main>
+
     <footer class="site-footer">
       <div>
         <strong>Reel Mate</strong>
-        <p>Portable offshore power for common DAIWA / SHIMANO electric reel applications.</p>
+        <p>DAIWA / SHIMANO 系の電動リール用途を想定したポータブル電源です。</p>
       </div>
       <div class="footer-links">
         <a href="ja.html">日本語トップ</a>
+        <a href="ja-payment.html">注文</a>
         <a href="ja-contact.html">お問い合わせ</a>
-        <a href="ja-payment.html">注文案内</a>
         <a href="ja-shipping.html">配送</a>
         <a href="ja-warranty.html">保証</a>
         <a href="ja-returns.html">返品</a>
+        <a href="product-sheet.pdf">製品資料</a>
       </div>
     </footer>
+    <script src="chat-config.js"></script>
+    <script src="support-chat.js"></script>
+    <script>
+      (function () {
+        const startButton = document.getElementById("start-payment");
+        const statusBox = document.getElementById("payment-status");
+        const countrySelect = document.getElementById("country");
+        const currencySelect = document.getElementById("currency");
+        const paymentChoices = Array.from(document.querySelectorAll('input[name="payment-choice"]'));
+        const labels = Array.from(document.querySelectorAll(".payment-choice"));
+
+        function activeChoice() {
+          return paymentChoices.find((input) => input.checked)?.value || "card";
+        }
+
+        function setStatus(message, tone) {
+          const palette = {
+            info: { bg: "rgba(24, 82, 137, 0.12)", border: "rgba(24, 82, 137, 0.35)", color: "#184a7d" },
+            success: { bg: "rgba(18, 117, 67, 0.12)", border: "rgba(18, 117, 67, 0.35)", color: "#0d5d36" },
+            error: { bg: "rgba(166, 48, 48, 0.12)", border: "rgba(166, 48, 48, 0.35)", color: "#8a2222" }
+          };
+          const style = palette[tone] || palette.info;
+          statusBox.style.display = "block";
+          statusBox.style.background = style.bg;
+          statusBox.style.border = `1px solid ${style.border}`;
+          statusBox.style.color = style.color;
+          statusBox.textContent = message;
+        }
+
+        function formData() {
+          return {
+            firstName: document.getElementById("first-name").value.trim(),
+            lastName: document.getElementById("last-name").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            phone: document.getElementById("phone").value.trim(),
+            country: countrySelect.value,
+            countryLabel: countrySelect.options[countrySelect.selectedIndex].text,
+            currency: currencySelect.value,
+            shippingAddress: document.getElementById("shipping-address").value.trim(),
+            city: document.getElementById("city").value.trim(),
+            postalCode: document.getElementById("postal-code").value.trim(),
+            reelModel: document.getElementById("reel-model").value.trim()
+          };
+        }
+
+        function validate(data) {
+          const requiredFields = [
+            ["名", data.firstName],
+            ["姓", data.lastName],
+            ["メールアドレス", data.email],
+            ["配送先住所", data.shippingAddress],
+            ["市区町村", data.city],
+            ["郵便番号", data.postalCode],
+            ["リール型番", data.reelModel]
+          ];
+
+          const missing = requiredFields.find(([, value]) => !value);
+          if (missing) {
+            setStatus(`${missing[0]}を入力してからお進みください。`, "error");
+            return false;
+          }
+          return true;
+        }
+
+        function syncChoices() {
+          labels.forEach((label) => {
+            const input = label.querySelector('input[name="payment-choice"]');
+            label.classList.toggle("payment-choice-active", input.checked);
+          });
+        }
+
+        paymentChoices.forEach((input) => {
+          input.addEventListener("change", syncChoices);
+        });
+
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("status") === "success") {
+          setStatus("支払いが完了しました。Stripe の領収書メールと、その後の注文確認連絡をご確認ください。", "success");
+        } else if (params.get("status") === "cancelled") {
+          setStatus("支払いはキャンセルされました。内容を見直して、準備ができたら再度お試しください。", "info");
+        }
+
+        startButton.addEventListener("click", async () => {
+          if (activeChoice() === "support") {
+            window.location.href = "ja-contact.html";
+            return;
+          }
+
+          const data = formData();
+          if (!validate(data)) {
+            return;
+          }
+
+          startButton.disabled = true;
+          startButton.textContent = "決済画面を準備しています...";
+          setStatus("Stripe の安全なチェックアウトを準備しています...", "info");
+
+          try {
+            const response = await fetch("/api/create-checkout-session", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok || !result.url) {
+              throw new Error(result.error || "現在チェックアウトを開始できません。");
+            }
+
+            window.location.href = result.url;
+          } catch (error) {
+            setStatus(error.message || "現在チェックアウトを開始できません。", "error");
+            startButton.disabled = false;
+            startButton.textContent = "US$699 をカードで支払う";
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
