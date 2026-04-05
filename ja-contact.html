@@ -216,7 +216,9 @@
         .then(function (r) { return r.json(); })
         .then(function (res) {
           if (res.success) {
-            status.textContent = '送信を受け付けました。24時間以内を目安にご連絡します。';
+            status.textContent = res.confirmationEmail && res.confirmationEmail.sent
+              ? '送信を受け付けました。受付確認メールをお送りしました。24時間以内を目安にご連絡します。'
+              : '送信を受け付けました。24時間以内を目安にご連絡します。';
             status.style.color = '#0c7d82';
             form.reset();
           } else {

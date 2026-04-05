@@ -1,3 +1,5 @@
+const { Resend } = require("resend");
+
 function trim(value) {
   return typeof value === "string" ? value.trim() : "";
 }
@@ -62,6 +64,10 @@ function sourcePageUrl(sourcePage) {
 
 function inferLanguage(sourcePage) {
   return trim(sourcePage).toLowerCase().startsWith("ja-") ? "Japanese" : "English";
+}
+
+function isJapaneseInquiry(entry) {
+  return inferLanguage(entry.sourcePage) === "Japanese";
 }
 
 function sourceLabel(entry) {
@@ -130,6 +136,97 @@ function slackField(title, value) {
     type: "mrkdwn",
     text: `*${title}*\n${value || "—"}`
   };
+}
+
+function buildConfirmationEmail(entry) {
+  const japanese = isJapaneseInquiry(entry);
+
+  if (japanese) {
+    return {
+      subject: "Reel Mate お問い合わせ受付のお知らせ",
+      text:
+        ` ${entry.name} 様\n\n` +
+        "お問い合わせありがとうございます。内容を受け付けました。\n" +
+        "24時間以内を目安に、配送・適合確認・支払い方法・充電器情報などについてご案内します。\n\n" +
+        `お問い合わせ種別: ${entry.supportTopic || "一般相談"}\n` +
+        `国・地域: ${entry.country || "未記入"}\n` +
+        `リール情報: ${entry.reelDetails || "未記入"}\n\n` +
+        "このメールは受付確認です。担当者からの返信をお待ちください。\n",
+      html:
+        `<div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;padding:24px;color:#10233d;">` +
+        `<h2 style="margin:0 0 16px;">Reel Mate お問い合わせ受付</h2>` +
+        `<p>${entry.name || "お客様"} 様</p>` +
+        `<p>お問い合わせありがとうございます。内容を受け付けました。</p>` +
+        `<p>24時間以内を目安に、配送・適合確認・支払い方法・充電器情報などについてご案内します。</p>` +
+        `<div style="background:#f5f8fc;border-radius:12px;padding:16px;margin:20px 0;">` +
+        `<p><strong>お問い合わせ種別:</strong> ${entry.supportTopic || "一般相談"}</p>` +
+        `<p><strong>国・地域:</strong> ${entry.country || "未記入"}</p>` +
+        `<p><strong>リール情報:</strong> ${entry.reelDetails || "未記入"}</p>` +
+        `</div>` +
+        `<p>このメールは受付確認です。担当者からの返信をお待ちください。</p>` +
+        `</div>`
+    };
+  }
+
+  return {
+    subject: "We received your Reel Mate inquiry",
+    text:
+      `Hi ${entry.name || "there"},\n\n` +
+      "Thanks for contacting Reel Mate. We received your inquiry.\n" +
+      "Our team targets a reply within 24 hours for compatibility, shipping, payment, and charger questions.\n\n" +
+      `Topic: ${entry.supportTopic || "General support"}\n` +
+      `Country/Region: ${entry.country || "Not provided"}\n` +
+      `Reel details: ${entry.reelDetails || "Not provided"}\n\n` +
+      "This email is only a confirmation that we received your message.\n",
+    html:
+      `<div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;padding:24px;color:#10233d;">` +
+      `<h2 style="margin:0 0 16px;">We received your Reel Mate inquiry</h2>` +
+      `<p>Hi ${entry.name || "there"},</p>` +
+      `<p>Thanks for contacting Reel Mate. We received your inquiry.</p>` +
+      `<p>Our team targets a reply within 24 hours for compatibility, shipping, payment, and charger questions.</p>` +
+      `<div style="background:#f5f8fc;border-radius:12px;padding:16px;margin:20px 0;">` +
+      `<p><strong>Topic:</strong> ${entry.supportTopic || "General support"}</p>` +
+      `<p><strong>Country/Region:</strong> ${entry.country || "Not provided"}</p>` +
+      `<p><strong>Reel details:</strong> ${entry.reelDetails || "Not provided"}</p>` +
+      `</div>` +
+      `<p>This email is only a confirmation that we received your message.</p>` +
+      `</div>`
+  };
+}
+
+async function sendConfirmationEmail(entry) {
+  const apiKey = trim(process.env.RESEND_API_KEY);
+  const from = trim(
+    process.env.SUPPORT_CONFIRM_FROM_EMAIL ||
+      process.env.SUPPORT_CONFIRMATION_FROM_EMAIL ||
+      process.env.CONFIRMATION_FROM_EMAIL
+  );
+  const replyTo = trim(process.env.SUPPORT_REPLY_TO_EMAIL);
+
+  if (!apiKey) {
+    return { sent: false, reason: "missing_resend_api_key" };
+  }
+
+  if (!from) {
+    return { sent: false, reason: "missing_confirmation_from_email" };
+  }
+
+  const resend = new Resend(apiKey);
+  const email = buildConfirmationEmail(entry);
+  const payload = {
+    from,
+    to: entry.email,
+    subject: email.subject,
+    text: email.text,
+    html: email.html
+  };
+
+  if (replyTo) {
+    payload.replyTo = replyTo;
+  }
+
+  await resend.emails.send(payload);
+  return { sent: true };
 }
 
 function buildWebhookPayload(entry) {
@@ -244,10 +341,19 @@ module.exports = async function handler(req, res) {
       notification = { sent: false, reason: error.message };
     }
 
+    let confirmationEmail = { sent: false, reason: "missing_resend_api_key" };
+    try {
+      confirmationEmail = await sendConfirmationEmail(entry);
+    } catch (error) {
+      console.error("site_inquiry_confirmation_email_error", error.message);
+      confirmationEmail = { sent: false, reason: error.message };
+    }
+
     return res.status(200).json({
       success: true,
       inquiryType: entry.inquiryType,
-      notification
+      notification,
+      confirmationEmail
     });
   } catch (error) {
     return res.status(400).json({ error: "Invalid JSON payload." });

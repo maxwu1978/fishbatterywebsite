@@ -143,6 +143,28 @@ This is an important planning boundary:
 - do not assume inquiry notifications are live unless the webhook is configured
   and tested
 
+## Inquiry confirmation emails
+
+The inquiry endpoint can also send an automatic confirmation email back to the
+customer after a support form is submitted.
+
+Optional environment variables:
+
+```bash
+RESEND_API_KEY=re_...
+SUPPORT_CONFIRM_FROM_EMAIL="Reel Mate <hello@yourdomain.com>"
+SUPPORT_REPLY_TO_EMAIL=support@yourdomain.com
+```
+
+Behavior:
+
+- if `RESEND_API_KEY` and `SUPPORT_CONFIRM_FROM_EMAIL` are configured, the site
+  sends an English or Japanese confirmation email based on the source form
+- if they are not configured, the inquiry still succeeds and Slack notification
+  behavior is unchanged
+- do not assume customer confirmation emails are live unless the Resend
+  variables are configured and tested
+
 ## Deployment
 
 The site is deployed on Vercel with `www.getreelmate.com` as the primary domain.

@@ -5,6 +5,7 @@
   "description": "Reel Mate static marketing site with Vercel payment endpoint",
   "license": "UNLICENSED",
   "dependencies": {
+    "resend": "^6.10.0",
     "stripe": "^22.0.0"
   }
 }

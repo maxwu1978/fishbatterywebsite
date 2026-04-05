@@ -209,7 +209,9 @@
           .then(function (r) { return r.json(); })
           .then(function (res) {
             if (res.success) {
-              status.textContent = 'Thank you. Your inquiry was received and support targets a reply within 24 hours.';
+              status.textContent = res.confirmationEmail && res.confirmationEmail.sent
+                ? 'Thank you. Your inquiry was received and a confirmation email has been sent. Support targets a reply within 24 hours.'
+                : 'Thank you. Your inquiry was received and support targets a reply within 24 hours.';
               status.style.color = '#0c7d82';
               form.reset();
             } else {
