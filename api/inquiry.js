@@ -70,6 +70,60 @@ function sourceLabel(entry) {
   return entry.sourcePage || "Site form";
 }
 
+function searchableText(entry) {
+  return [
+    entry.supportTopic,
+    entry.requestType,
+    entry.businessType,
+    entry.message,
+    entry.reelDetails
+  ]
+    .map((value) => trim(value).toLowerCase())
+    .join(" ");
+}
+
+function inferCategory(entry) {
+  if (entry.inquiryType === "wholesale") return "Wholesale";
+
+  const text = searchableText(entry);
+  if (/(pay|payment|card|checkout|invoice|order|決済|支払|注文)/.test(text)) return "Payment";
+  if (/(ship|shipping|delivery|refund|物流|配送|発送|返金)/.test(text)) return "Shipping";
+  if (/(charger|charge|adapter|充電)/.test(text)) return "Charger";
+  if (/(compatib|voltage|reel|model|connector|適合|互換|電圧|接続)/.test(text)) return "Compatibility";
+  return "General Support";
+}
+
+function inferPriority(entry, category) {
+  if (entry.inquiryType === "wholesale") return "High";
+  if (category === "Payment") return "High";
+  if (category === "Shipping" || category === "Compatibility") return "Medium";
+  return "Normal";
+}
+
+function nextStepText(entry, category) {
+  if (entry.inquiryType === "wholesale") {
+    return "Reply with pricing, MOQ, lead time, and shipping scope.";
+  }
+
+  if (category === "Payment") {
+    return "Reply within 24 hours and confirm payment path, pricing, and any order-review help needed.";
+  }
+
+  if (category === "Shipping") {
+    return "Reply within 24 hours and confirm destination, shipping feasibility, and refund-before-shipment policy if needed.";
+  }
+
+  if (category === "Compatibility") {
+    return "Reply within 24 hours and confirm reel model, voltage, and connector details before ordering.";
+  }
+
+  if (category === "Charger") {
+    return "Reply within 24 hours and confirm included charger details, input range, and documentation availability if requested.";
+  }
+
+  return "Reply within 24 hours and confirm compatibility, charger, shipping, or payment help as needed.";
+}
+
 function slackField(title, value) {
   return {
     type: "mrkdwn",
@@ -79,11 +133,15 @@ function slackField(title, value) {
 
 function buildWebhookPayload(entry) {
   const isWholesale = entry.inquiryType === "wholesale";
+  const category = inferCategory(entry);
+  const priority = inferPriority(entry, category);
   const title = isWholesale ? "New wholesale inquiry" : "New support inquiry";
   const sourceUrl = sourcePageUrl(entry.sourcePage);
   const sourceText = sourceUrl ? `<${sourceUrl}|${sourceLabel(entry)}>` : sourceLabel(entry);
   const fields = [
     slackField("Type", isWholesale ? "Wholesale" : "Support"),
+    slackField("Category", category),
+    slackField("Priority", priority),
     slackField("Name", entry.name),
     slackField("Country", entry.country),
     slackField("Language", inferLanguage(entry.sourcePage)),
@@ -122,9 +180,7 @@ function buildWebhookPayload(entry) {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: isWholesale
-            ? "*Next step*\nReply with pricing, MOQ, lead time, and shipping scope."
-            : "*Next step*\nReply within 24 hours and confirm compatibility, charger, shipping, or payment help as needed."
+          text: `*Next step*\n${nextStepText(entry, category)}`
         }
       },
       {
