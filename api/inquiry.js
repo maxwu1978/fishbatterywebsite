@@ -35,6 +35,7 @@ function normalizeInquiry(payload) {
   return {
     inquiryType,
     name: clamp(payload.name, 200),
+    email: clamp(payload.email, 200),
     company: clamp(payload.company, 200),
     country: clamp(payload.country || payload["country-region"], 120),
     message: clamp(payload.message, 3000),
@@ -143,6 +144,7 @@ function buildWebhookPayload(entry) {
     slackField("Category", category),
     slackField("Priority", priority),
     slackField("Name", entry.name),
+    slackField("Email", entry.email),
     slackField("Country", entry.country),
     slackField("Language", inferLanguage(entry.sourcePage)),
     slackField("Source", sourceText)
@@ -228,8 +230,8 @@ module.exports = async function handler(req, res) {
     const payload = await getJsonBody(req);
     const entry = normalizeInquiry(payload);
 
-    if (!entry.name || !entry.message) {
-      return res.status(400).json({ error: "name and message are required." });
+    if (!entry.name || !entry.email || !entry.message) {
+      return res.status(400).json({ error: "name, email, and message are required." });
     }
 
     console.log("site_inquiry_received", entry);

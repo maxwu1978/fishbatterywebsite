@@ -137,7 +137,11 @@
         <form class="contact-form" id="inquiry-form">
           <label>
             お名前
-            <input type="text" name="name" placeholder="お名前" />
+            <input type="text" name="name" placeholder="お名前" required />
+          </label>
+          <label>
+            メールアドレス
+            <input type="email" name="email" placeholder="name@example.jp" required />
           </label>
           <label>
             会社名 / チーム名
@@ -167,7 +171,7 @@
           </label>
           <label class="full-width">
             メッセージ
-            <textarea name="message" rows="6" placeholder="確認したい内容をご記入ください。例: 配送先、リール型番、支払い方法、同梱内容など。"></textarea>
+            <textarea name="message" rows="6" placeholder="確認したい内容をご記入ください。例: 配送先、リール型番、支払い方法、同梱内容など。" required></textarea>
           </label>
           <button class="button" type="submit">日本語で問い合わせを送信</button>
           <p class="form-status" id="form-status" style="display:none;margin-top:1rem;font-weight:600;"></p>

@@ -123,7 +123,11 @@
         <form class="contact-form" id="inquiry-form">
           <label>
             Name
-            <input type="text" name="name" placeholder="Your name" />
+            <input type="text" name="name" placeholder="Your name" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" placeholder="you@example.com" required />
           </label>
           <label>
             Company / Team
@@ -155,7 +159,7 @@
           </label>
           <label class="full-width">
             Message
-            <textarea name="message" rows="6" placeholder="Tell us what you want to confirm before payment, such as reel fit, shipping country, charger details, preferred payment method, or included accessories."></textarea>
+            <textarea name="message" rows="6" placeholder="Tell us what you want to confirm before payment, such as reel fit, shipping country, charger details, preferred payment method, or included accessories." required></textarea>
           </label>
           <button class="button" type="submit">Send Support Inquiry</button>
           <p class="form-status" id="form-status" style="display:none;margin-top:1rem;font-weight:600;"></p>
