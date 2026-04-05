@@ -197,47 +197,18 @@
         <a href="ja-returns.html">返品</a>
       </div>
     </footer>
+    <script src="form-handler.js"></script>
     <script>
-    (function () {
-      var form = document.getElementById('inquiry-form');
-      if (!form) return;
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var status = document.getElementById('form-status');
-        var btn = form.querySelector('button[type="submit"]');
-        btn.disabled = true;
-        status.style.display = 'block';
-        status.textContent = '送信しています...';
-        status.style.color = '';
-        var data = { sourcePage: 'ja-contact.html' };
-        form.querySelectorAll('input, select, textarea').forEach(function (el) {
-          if (el.name) data[el.name] = el.value;
-        });
-        fetch('/api/inquiry', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        })
-        .then(function (r) { return r.json(); })
-        .then(function (res) {
-          if (res.success) {
-            status.textContent = res.confirmationEmail && res.confirmationEmail.sent
-              ? '送信を受け付けました。受付確認メールをお送りしました。24時間以内を目安にご連絡します。'
-              : '送信を受け付けました。24時間以内を目安にご連絡します。';
-            status.style.color = '#0c7d82';
-            form.reset();
-          } else {
-            status.textContent = res.error || '送信に失敗しました。しばらくしてから再度お試しください。';
-            status.style.color = '#c0392b';
-          }
-        })
-        .catch(function () {
-          status.textContent = '通信エラーが発生しました。接続を確認して再度お試しください。';
-          status.style.color = '#c0392b';
-        })
-        .finally(function () { btn.disabled = false; });
+      initInquiryForm({
+        sourcePage: 'ja-contact.html',
+        messages: {
+          sending: '送信しています...',
+          success: '送信を受け付けました。24時間以内を目安にご連絡します。',
+          successEmail: '送信を受け付けました。受付確認メールをお送りしました。24時間以内を目安にご連絡します。',
+          error: '送信に失敗しました。しばらくしてから再度お試しください。',
+          networkError: '通信エラーが発生しました。接続を確認して再度お試しください。'
+        }
       });
-    })();
     </script>
   </body>
 </html>

@@ -11,8 +11,7 @@ function isAuthorized(req) {
   }
 
   const authHeader = trim(req.headers["x-order-token"]);
-  const authQuery = trim((req.query && req.query.token) || "");
-  if (authHeader === expected || authQuery === expected) {
+  if (authHeader === expected) {
     return { ok: true };
   }
 

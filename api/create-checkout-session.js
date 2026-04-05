@@ -34,7 +34,7 @@ function trim(value) {
 }
 
 function safeOrigin(req) {
-  const configured = trim(process.env.SITE_URL);
+  const configured = trim(process.env.SITE_URL).replace(/[\r\n]+/g, "");
   if (configured) {
     return configured.replace(/\/+$/, "");
   }

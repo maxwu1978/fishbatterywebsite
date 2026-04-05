@@ -51,6 +51,14 @@ function normalizeInquiry(payload) {
   };
 }
 
+function escapeHtml(value) {
+  return trim(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 function compactMessage(value, max = 280) {
   const text = trim(value).replace(/\s+/g, " ");
   return text.length > max ? `${text.slice(0, max - 1)}…` : text;
@@ -163,13 +171,13 @@ function buildConfirmationEmail(entry) {
       html:
         `<div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;padding:24px;color:#10233d;">` +
         `<h2 style="margin:0 0 16px;">Reel Mate お問い合わせ受付</h2>` +
-        `<p>${entry.name || "お客様"} 様</p>` +
+        `<p>${escapeHtml(entry.name) || "お客様"} 様</p>` +
         `<p>お問い合わせありがとうございます。内容を受け付けました。</p>` +
         `<p>24時間以内を目安に、配送・適合確認・支払い方法・充電器情報などについてご案内します。</p>` +
         `<div style="background:#f5f8fc;border-radius:12px;padding:16px;margin:20px 0;">` +
-        `<p><strong>お問い合わせ種別:</strong> ${entry.supportTopic || "一般相談"}</p>` +
-        `<p><strong>国・地域:</strong> ${entry.country || "未記入"}</p>` +
-        `<p><strong>リール情報:</strong> ${entry.reelDetails || "未記入"}</p>` +
+        `<p><strong>お問い合わせ種別:</strong> ${escapeHtml(entry.supportTopic) || "一般相談"}</p>` +
+        `<p><strong>国・地域:</strong> ${escapeHtml(entry.country) || "未記入"}</p>` +
+        `<p><strong>リール情報:</strong> ${escapeHtml(entry.reelDetails) || "未記入"}</p>` +
         `</div>` +
         `<p>このメールは受付確認です。担当者からの返信をお待ちください。</p>` +
         `</div>`
@@ -189,13 +197,13 @@ function buildConfirmationEmail(entry) {
     html:
       `<div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;padding:24px;color:#10233d;">` +
       `<h2 style="margin:0 0 16px;">We received your Reel Mate inquiry</h2>` +
-      `<p>Hi ${entry.name || "there"},</p>` +
+      `<p>Hi ${escapeHtml(entry.name) || "there"},</p>` +
       `<p>Thanks for contacting Reel Mate. We received your inquiry.</p>` +
       `<p>Our team targets a reply within 24 hours for compatibility, shipping, payment, and charger questions.</p>` +
       `<div style="background:#f5f8fc;border-radius:12px;padding:16px;margin:20px 0;">` +
-      `<p><strong>Topic:</strong> ${entry.supportTopic || "General support"}</p>` +
-      `<p><strong>Country/Region:</strong> ${entry.country || "Not provided"}</p>` +
-      `<p><strong>Reel details:</strong> ${entry.reelDetails || "Not provided"}</p>` +
+      `<p><strong>Topic:</strong> ${escapeHtml(entry.supportTopic) || "General support"}</p>` +
+      `<p><strong>Country/Region:</strong> ${escapeHtml(entry.country) || "Not provided"}</p>` +
+      `<p><strong>Reel details:</strong> ${escapeHtml(entry.reelDetails) || "Not provided"}</p>` +
       `</div>` +
       `<p>This email is only a confirmation that we received your message.</p>` +
       `</div>`
@@ -327,10 +335,31 @@ async function notifyWebhook(entry) {
   return { sent: true };
 }
 
+// Simple in-memory rate limiter (best-effort on serverless; survives warm instances)
+const _ipBuckets = new Map();
+const RATE_WINDOW_MS = 60 * 1000;
+const RATE_MAX = 5;
+
+function rateLimitOk(req) {
+  const ip = trim(req.headers["x-forwarded-for"]).split(",")[0] || "unknown";
+  const now = Date.now();
+  let bucket = _ipBuckets.get(ip);
+  if (!bucket || now - bucket.start > RATE_WINDOW_MS) {
+    bucket = { start: now, count: 0 };
+    _ipBuckets.set(ip, bucket);
+  }
+  bucket.count += 1;
+  return bucket.count <= RATE_MAX;
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     return res.status(405).json({ error: "Method not allowed." });
+  }
+
+  if (!rateLimitOk(req)) {
+    return res.status(429).json({ error: "Too many requests. Please wait a moment and try again." });
   }
 
   try {

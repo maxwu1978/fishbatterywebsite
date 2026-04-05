@@ -84,22 +84,41 @@
           statusBox.textContent = message;
         }
 
+        function textLine(label, value) {
+          const p = document.createElement("p");
+          const strong = document.createElement("strong");
+          strong.textContent = label;
+          p.appendChild(strong);
+          p.appendChild(document.createTextNode(" " + (value || "-")));
+          return p;
+        }
+
         function renderRecord(record) {
           const article = document.createElement("article");
           article.className = "subpage-card";
           const created = new Date(record.created * 1000).toLocaleString();
-          article.innerHTML = `
-            <p class="eyebrow">Order</p>
-            <h2 style="font-size:1.1rem;word-break:break-all;">${record.id}</h2>
-            <p><strong>Created:</strong> ${created}</p>
-            <p><strong>Email:</strong> ${record.customerEmail || "-"}</p>
-            <p><strong>Name:</strong> ${record.customerName || [record.firstName, record.lastName].filter(Boolean).join(" ") || "-"}</p>
-            <p><strong>Amount:</strong> ${(record.amountTotal / 100).toFixed(2)} ${String(record.currency || "").toUpperCase()}</p>
-            <p><strong>Status:</strong> ${record.paymentStatus || record.status || "-"}</p>
-            <p><strong>Country:</strong> ${record.country || "-"}</p>
-            <p><strong>Address:</strong> ${record.shippingAddress || "-"} ${record.city || ""} ${record.postalCode || ""}</p>
-            <p><strong>Reel Model:</strong> ${record.reelModel || "-"}</p>
-          `;
+          const name = record.customerName || [record.firstName, record.lastName].filter(Boolean).join(" ") || "-";
+          const amount = (record.amountTotal / 100).toFixed(2) + " " + String(record.currency || "").toUpperCase();
+          const address = [record.shippingAddress, record.city, record.postalCode].filter(Boolean).join(" ") || "-";
+
+          const eyebrow = document.createElement("p");
+          eyebrow.className = "eyebrow";
+          eyebrow.textContent = "Order";
+          article.appendChild(eyebrow);
+
+          const h2 = document.createElement("h2");
+          h2.style.cssText = "font-size:1.1rem;word-break:break-all;";
+          h2.textContent = record.id;
+          article.appendChild(h2);
+
+          article.appendChild(textLine("Created:", created));
+          article.appendChild(textLine("Email:", record.customerEmail));
+          article.appendChild(textLine("Name:", name));
+          article.appendChild(textLine("Amount:", amount));
+          article.appendChild(textLine("Status:", record.paymentStatus || record.status));
+          article.appendChild(textLine("Country:", record.country));
+          article.appendChild(textLine("Address:", address));
+          article.appendChild(textLine("Reel Model:", record.reelModel));
           return article;
         }
 

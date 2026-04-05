@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /orders.html
 
 Sitemap: https://www.getreelmate.com/sitemap.xml
