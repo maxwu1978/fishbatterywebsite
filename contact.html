@@ -44,25 +44,25 @@
     <main class="subpage-main">
       <section class="subpage-hero">
         <div>
-          <p class="eyebrow">Live Support</p>
-          <h1>Crisp-Ready Support for Voltage Match, Shipping, and Payment Questions</h1>
+          <p class="eyebrow">Customer Support</p>
+          <h1>Structured Support for Voltage Match, Shipping, and Order Questions</h1>
           <p class="hero-text">
-            Use the support console below for instant guidance before payment.
-            You can tap common topics, choose your country, and get immediate
-            answers about voltage match, shipping, payment methods, and what is
-            included in the kit. Human support targets replies within 24 hours.
+            Use this page to send a structured support inquiry before payment.
+            Share your country, reel details, and what you want to confirm about
+            shipping, payment, or included accessories. Human support targets
+            replies within 24 hours.
           </p>
           <p class="support-region-note">
             Current supported sales regions: United States and EU countries only.
           </p>
         </div>
         <div class="subpage-panel">
-          <h3>Recommended Live Chat Setup</h3>
+          <h3>Current Support Setup</h3>
           <ul>
-            <li>Crisp is the recommended sitewide live chat provider</li>
-            <li>Fast fit and shipping answers for US and EU buyers</li>
-            <li>Good match for premium retail support and order help</li>
-            <li>Current console stays useful until live chat is enabled</li>
+            <li>Structured support inquiry is live now</li>
+            <li>Best fit for US and EU retail buyers before payment</li>
+            <li>Notifications are Slack-webhook ready</li>
+            <li>Live chat can be added later if response volume grows</li>
           </ul>
         </div>
       </section>
@@ -70,105 +70,96 @@
       <section class="subpage-visuals">
         <figure class="subpage-visual-card">
           <img src="资料/new imaage/c1ec84332049dec59539c7a6fe4f58fa.jpg" alt="Battery with protective case, carrying bag, and shoulder strap" />
-          <figcaption>Use this support page to clarify fit, shipping, payment methods, and included accessories before payment.</figcaption>
+          <figcaption>Use this page to clarify fit, shipping, payment methods, and included accessories before payment.</figcaption>
         </figure>
         <figure class="subpage-visual-card">
           <img src="资料/new imaage/f4e1986247ebbc29a723c2f84b759bb3.jpg" alt="Battery status display shown during fishing use onboard" />
-          <figcaption>Choose a topic below and the support console will instantly guide you to the next step.</figcaption>
+          <figcaption>Share clear order details so support can respond quickly with the next step.</figcaption>
         </figure>
       </section>
 
-      <section class="support-console">
-        <div class="support-sidebar">
-          <div class="contact-card">
-            <p class="eyebrow">Support Status</p>
-            <h2>Instant Guidance Now, Crisp Live Chat Next</h2>
-            <p>
-              This page already works like an instant support interface. The next
-              upgrade is a Crisp live-chat widget so customers can move from
-              guided answers to real-time conversation without leaving the site.
-            </p>
-            <div class="subpage-points">
-              <div>Instant guidance for reel fit questions</div>
-              <div>24-hour reply target from support</div>
-              <div>Crisp-ready for sitewide live support rollout</div>
-            </div>
+      <section class="wholesale-grid">
+        <article class="subpage-card">
+          <p class="eyebrow">Best Way To Contact</p>
+          <h2>Send the key details in one message</h2>
+          <ul>
+            <li>Your country or delivery region</li>
+            <li>Your reel brand and exact model</li>
+            <li>What you want to confirm before payment</li>
+            <li>Any charger, shipping, or included-accessory question</li>
+          </ul>
+        </article>
+
+        <article class="subpage-card">
+          <p class="eyebrow">Reply Target</p>
+          <h2>Built for pre-order support, not instant chat</h2>
+          <p>
+            The current support flow is form-based so each inquiry reaches the
+            team with enough detail to answer clearly. That is more reliable for
+            high-consideration questions than a half-configured live-chat box.
+          </p>
+          <div class="origin-points">
+            <div>24-hour reply target</div>
+            <div>Clear shipping and fit checks before payment</div>
+            <div>Slack notification ready once webhook is configured</div>
+            <div>Live chat can be added later without changing the form flow</div>
           </div>
+        </article>
+      </section>
 
-          <div class="support-shortcuts">
-            <button class="support-chip is-active" type="button" data-support-topic="compatibility">Voltage Match</button>
-            <button class="support-chip" type="button" data-support-topic="shipping">Shipping</button>
-            <button class="support-chip" type="button" data-support-topic="payment">Payment Methods</button>
-            <button class="support-chip" type="button" data-support-topic="included">What's Included</button>
-            <button class="support-chip" type="button" data-support-topic="warranty">Warranty</button>
-          </div>
-        </div>
-
-        <div class="support-chat-shell">
-          <div class="support-chat-header">
-            <div>
-              <p class="eyebrow">Support Console</p>
-              <h2>Live Guidance Before Checkout</h2>
-            </div>
-            <div class="support-online">
-              <span></span>
-              <strong>Instant answers active</strong>
-            </div>
-          </div>
-
-          <div id="support-log" class="support-log" aria-live="polite">
-            <article class="support-message support-message-bot">
-              <p class="support-author">Reel Mate Support</p>
-              <div class="support-bubble">
-                Welcome. Choose a topic below and I will instantly guide you on
-                voltage match, shipping, payment methods, or
-                what is included in the full kit.
-              </div>
-            </article>
-          </div>
-
-          <div class="support-controls">
-            <div class="support-form-grid">
-              <label>
-                Country / Region
-                <select id="support-country">
-                  <option value="United States">United States</option>
-                  <option value="Germany">Germany</option>
-                  <option value="France">France</option>
-                  <option value="Spain">Spain</option>
-                  <option value="Italy">Italy</option>
-                  <option value="Netherlands">Netherlands</option>
-                  <option value="Other EU Country">Other EU Country</option>
-                  <option value="Unsupported Region">Unsupported Region</option>
-                </select>
-              </label>
-              <label>
-                Reel Brand
-                <select id="support-brand">
-                  <option value="SHIMANO">SHIMANO</option>
-                  <option value="DAIWA">DAIWA</option>
-                  <option value="Other Electric Reel">Other Electric Reel</option>
-                </select>
-              </label>
-            </div>
-
-            <div class="support-quick-actions">
-              <button class="support-action" type="button" data-support-topic="compatibility">Check voltage match</button>
-              <button class="support-action" type="button" data-support-topic="shipping">Check shipping</button>
-              <button class="support-action" type="button" data-support-topic="payment">See payment methods</button>
-            </div>
-
-            <label class="support-note-field">
-              Extra details
-              <textarea id="support-note" rows="4" placeholder="Optional: add your reel model or a short note, such as Beastmaster 3000, Spain delivery, card payment preferred."></textarea>
-            </label>
-
-            <div class="support-actions-row">
-              <button id="support-send" class="button" type="button">Get Instant Answer</button>
-              <a class="button button-secondary button-dark" href="payment.html">Go to Payment Page</a>
-            </div>
+      <section class="contact">
+        <div class="contact-card">
+          <p class="eyebrow">Send Inquiry</p>
+          <h2>Support Form Before Payment</h2>
+          <p>
+            Use this form to confirm compatibility, shipping, charger details,
+            included accessories, or payment questions before ordering.
+          </p>
+          <div class="contact-links">
+            <a class="js-email" data-u="service" data-d="roopvrt.com">Loading…</a>
+            <a href="https://www.roopvrt.com/" target="_blank" rel="noopener noreferrer">www.roopvrt.com</a>
           </div>
         </div>
+        <form class="contact-form" id="inquiry-form">
+          <label>
+            Name
+            <input type="text" name="name" placeholder="Your name" />
+          </label>
+          <label>
+            Company / Team
+            <input type="text" name="company" placeholder="Optional" />
+          </label>
+          <label>
+            Country / Region
+            <input type="text" name="country" placeholder="United States, Germany, Spain..." />
+          </label>
+          <label>
+            Support Topic
+            <select name="support-topic">
+              <option>Compatibility Check</option>
+              <option>Shipping Question</option>
+              <option>Payment Method Question</option>
+              <option>Included Accessories Question</option>
+              <option>Charger Question</option>
+              <option>Warranty Question</option>
+              <option>General Product Support</option>
+            </select>
+          </label>
+          <label>
+            Reel Model
+            <input type="text" name="reel-details" placeholder="Example: SHIMANO Beastmaster 3000" />
+          </label>
+          <label>
+            Delivery Details
+            <input type="text" name="country-region" placeholder="Example: Tokyo / Germany / Spain" />
+          </label>
+          <label class="full-width">
+            Message
+            <textarea name="message" rows="6" placeholder="Tell us what you want to confirm before payment, such as reel fit, shipping country, charger details, preferred payment method, or included accessories."></textarea>
+          </label>
+          <button class="button" type="submit">Send Support Inquiry</button>
+          <p class="form-status" id="form-status" style="display:none;margin-top:1rem;font-weight:600;"></p>
+        </form>
       </section>
     </main>
 
@@ -192,137 +183,41 @@
     <script src="support-chat.js"></script>
     <script>
       (function () {
-        const log = document.getElementById("support-log");
-        const chips = Array.from(document.querySelectorAll("[data-support-topic]"));
-        const countrySelect = document.getElementById("support-country");
-        const brandSelect = document.getElementById("support-brand");
-        const noteInput = document.getElementById("support-note");
-        const sendButton = document.getElementById("support-send");
-
-        let activeTopic = "compatibility";
-
-        const topicTitles = {
-          compatibility: "Voltage Match",
-          shipping: "Shipping",
-          payment: "Payment Methods",
-          included: "What's Included",
-          warranty: "Warranty"
-        };
-
-        const fallbackResponses = {
-          compatibility: ({ country, brand, note }) =>
-            country === "Unsupported Region"
-              ? `Sales are currently limited to the United States and EU countries. If you are outside those regions, direct ordering is not available yet.`
-              : `For ${brand} setups in ${country}, Reel Mate is positioned for common electric reel applications. If the voltage matches your setup, you can move ahead with confidence. ${note ? `Based on your note, pay extra attention to: ${note}. ` : ""}If you want human help, support targets replies within 24 hours.`,
-          shipping: ({ country, note }) =>
-            country === "Unsupported Region"
-              ? `Sales are currently limited to the United States and EU countries. If your destination is outside those regions, direct ordering is not yet available.`
-              : `Shipping support is available for ${country}. Before payment, confirm destination details and any special delivery note. ${note ? `Current note received: ${note}. ` : ""}The current sales scope covers the United States and EU countries only.`,
-          payment: ({ country }) =>
-            country === "Unsupported Region"
-              ? `Online card payment is currently offered only for buyers in the United States and EU countries.`
-              : `For buyers in ${country}, the current direct-order flow supports secure card payment and a guided payment-support step. If you need another payment method, contact support before ordering.`,
-          included: () =>
-            `The full kit includes the battery, protective case, charger, cable set, and manual. The listed retail price is US$699 for the complete ready-to-use setup.`,
-          warranty: () =>
-            `Reel Mate includes 1-year warranty support for normal intended use. You can also review the warranty and returns pages before payment if you want a more complete policy check.`
-        };
-
-        function setActiveTopic(topic) {
-          activeTopic = topic;
-          chips.forEach((chip) => {
-            chip.classList.toggle("is-active", chip.dataset.supportTopic === topic);
+        var form = document.getElementById('inquiry-form');
+        if (!form) return;
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var status = document.getElementById('form-status');
+          var btn = form.querySelector('button[type="submit"]');
+          btn.disabled = true;
+          status.style.display = 'block';
+          status.textContent = 'Sending your inquiry...';
+          status.style.color = '';
+          var data = { sourcePage: 'contact.html' };
+          form.querySelectorAll('input, select, textarea').forEach(function (el) {
+            if (el.name) data[el.name] = el.value;
           });
-        }
-
-        function appendMessage(author, text, isUser) {
-          const article = document.createElement("article");
-          article.className = `support-message ${isUser ? "support-message-user" : "support-message-bot"}`;
-
-          const authorEl = document.createElement("p");
-          authorEl.className = "support-author";
-          authorEl.textContent = author;
-
-          const bubble = document.createElement("div");
-          bubble.className = "support-bubble";
-          bubble.textContent = text;
-
-          article.appendChild(authorEl);
-          article.appendChild(bubble);
-          log.appendChild(article);
-          log.scrollTop = log.scrollHeight;
-        }
-
-        async function getSupportAnswer(topic, country, brand, note) {
-          const title = topicTitles[topic] || "Support";
-          const payload = {
-            topic,
-            country,
-            brand,
-            note,
-            message: `${title} question for ${brand} in ${country}${note ? ` | ${note}` : ""}`
-          };
-
-          try {
-            const response = await fetch("/api/chat", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-              throw new Error(`Request failed: ${response.status}`);
+          fetch('/api/inquiry', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          })
+          .then(function (r) { return r.json(); })
+          .then(function (res) {
+            if (res.success) {
+              status.textContent = 'Thank you. Your inquiry was received and support targets a reply within 24 hours.';
+              status.style.color = '#0c7d82';
+              form.reset();
+            } else {
+              status.textContent = res.error || 'Submission failed. Please try again shortly.';
+              status.style.color = '#c0392b';
             }
-
-            return await response.json();
-          } catch (error) {
-            return {
-              answer: fallbackResponses[topic]({ country, brand, note }),
-              handoff_recommended: topic === "compatibility" && brand === "Other Electric Reel",
-              handoff_reason: "Local fallback response used because the API is not active."
-            };
-          }
-        }
-
-        async function handleSupportRequest(topic) {
-          setActiveTopic(topic);
-
-          const country = countrySelect.value;
-          const brand = brandSelect.value;
-          const note = noteInput.value.trim();
-          const title = topicTitles[topic] || "Support";
-
-          appendMessage("You", `${title} question for ${brand} in ${country}${note ? ` | ${note}` : ""}`, true);
-          appendMessage("Reel Mate Support", "Checking the support knowledge base now...", false);
-
-          const pending = log.lastElementChild;
-          const result = await getSupportAnswer(topic, country, brand, note);
-
-          if (pending) {
-            pending.remove();
-          }
-
-          appendMessage("Reel Mate Support", result.answer, false);
-
-          if (result.handoff_recommended) {
-            appendMessage(
-              "Reel Mate Support",
-              `This case should go to human support${result.handoff_reason ? `: ${result.handoff_reason}` : "."} Use the live chat once enabled, or continue with the support team manually.`,
-              false
-            );
-          }
-        }
-
-        chips.forEach((chip) => {
-          chip.addEventListener("click", () => {
-            handleSupportRequest(chip.dataset.supportTopic);
-          });
-        });
-
-        sendButton.addEventListener("click", () => {
-          handleSupportRequest(activeTopic);
+          })
+          .catch(function () {
+            status.textContent = 'A network error occurred. Please check your connection and try again.';
+            status.style.color = '#c0392b';
+          })
+          .finally(function () { btn.disabled = false; });
         });
       })();
     </script>

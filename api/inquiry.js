@@ -48,6 +48,70 @@ function normalizeInquiry(payload) {
   };
 }
 
+function compactMessage(value, max = 280) {
+  const text = trim(value).replace(/\s+/g, " ");
+  return text.length > max ? `${text.slice(0, max - 1)}…` : text;
+}
+
+function slackField(title, value, short = false) {
+  return {
+    type: "mrkdwn",
+    text: `*${title}*\n${value || "—"}`,
+    short
+  };
+}
+
+function buildWebhookPayload(entry) {
+  const title = entry.inquiryType === "wholesale" ? "New wholesale inquiry" : "New support inquiry";
+  const fields = [
+    slackField("Type", entry.inquiryType, true),
+    slackField("Name", entry.name, true),
+    slackField("Country", entry.country, true),
+    slackField("Source", entry.sourcePage, true)
+  ];
+
+  if (entry.company) fields.push(slackField("Company", entry.company, true));
+  if (entry.supportTopic) fields.push(slackField("Topic", entry.supportTopic, true));
+  if (entry.reelDetails) fields.push(slackField("Reel", entry.reelDetails, true));
+  if (entry.requestType) fields.push(slackField("Request", entry.requestType, true));
+  if (entry.quantity) fields.push(slackField("Quantity", entry.quantity, true));
+  if (entry.businessType) fields.push(slackField("Business", entry.businessType, true));
+
+  return {
+    text: `[Reel Mate ${entry.inquiryType}] ${entry.name || "Unknown"} / ${entry.country || "No country"}`,
+    blocks: [
+      {
+        type: "header",
+        text: {
+          type: "plain_text",
+          text: title
+        }
+      },
+      {
+        type: "section",
+        fields
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `*Message*\n${compactMessage(entry.message, 1200) || "—"}`
+        }
+      },
+      {
+        type: "context",
+        elements: [
+          {
+            type: "mrkdwn",
+            text: `Received: ${entry.receivedAt}`
+          }
+        ]
+      }
+    ],
+    inquiry: entry
+  };
+}
+
 async function notifyWebhook(entry) {
   const webhookUrl = trim(process.env.INQUIRY_WEBHOOK_URL);
   if (!webhookUrl) {
@@ -59,10 +123,7 @@ async function notifyWebhook(entry) {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({
-      text: `[Reel Mate ${entry.inquiryType}] ${entry.name || "Unknown"} / ${entry.country || "No country"}`,
-      inquiry: entry
-    })
+    body: JSON.stringify(buildWebhookPayload(entry))
   });
 
   if (!response.ok) {
