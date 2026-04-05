@@ -53,6 +53,23 @@ function compactMessage(value, max = 280) {
   return text.length > max ? `${text.slice(0, max - 1)}…` : text;
 }
 
+function sourcePageUrl(sourcePage) {
+  const page = trim(sourcePage).replace(/^\//, "");
+  if (!page) return "";
+  return `https://www.getreelmate.com/${page}`;
+}
+
+function inferLanguage(sourcePage) {
+  return trim(sourcePage).toLowerCase().startsWith("ja-") ? "Japanese" : "English";
+}
+
+function sourceLabel(entry) {
+  if (entry.sourcePage === "ja-contact.html") return "Japanese contact form";
+  if (entry.sourcePage === "contact.html") return "English contact form";
+  if (entry.sourcePage === "wholesale.html") return "Wholesale form";
+  return entry.sourcePage || "Site form";
+}
+
 function slackField(title, value) {
   return {
     type: "mrkdwn",
@@ -61,12 +78,16 @@ function slackField(title, value) {
 }
 
 function buildWebhookPayload(entry) {
-  const title = entry.inquiryType === "wholesale" ? "New wholesale inquiry" : "New support inquiry";
+  const isWholesale = entry.inquiryType === "wholesale";
+  const title = isWholesale ? "New wholesale inquiry" : "New support inquiry";
+  const sourceUrl = sourcePageUrl(entry.sourcePage);
+  const sourceText = sourceUrl ? `<${sourceUrl}|${sourceLabel(entry)}>` : sourceLabel(entry);
   const fields = [
-    slackField("Type", entry.inquiryType),
+    slackField("Type", isWholesale ? "Wholesale" : "Support"),
     slackField("Name", entry.name),
     slackField("Country", entry.country),
-    slackField("Source", entry.sourcePage)
+    slackField("Language", inferLanguage(entry.sourcePage)),
+    slackField("Source", sourceText)
   ];
 
   if (entry.company) fields.push(slackField("Company", entry.company));
@@ -95,6 +116,15 @@ function buildWebhookPayload(entry) {
         text: {
           type: "mrkdwn",
           text: `*Message*\n${compactMessage(entry.message, 1200) || "—"}`
+        }
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: isWholesale
+            ? "*Next step*\nReply with pricing, MOQ, lead time, and shipping scope."
+            : "*Next step*\nReply within 24 hours and confirm compatibility, charger, shipping, or payment help as needed."
         }
       },
       {
