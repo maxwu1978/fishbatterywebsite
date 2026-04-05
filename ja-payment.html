@@ -44,18 +44,18 @@
     <main class="subpage-main payment-main solar-main">
       <section class="solar-intro glass-card">
         <div>
-          <p class="eyebrow">日本語カード決済</p>
+          <p class="eyebrow">日本語注文ページ</p>
           <h1>Reel Mate の注文を日本語で進める</h1>
           <p class="hero-text">
             Stripe によるカード決済でそのまま注文できます。配送先、購入者情報、
-            リール情報を入力したうえで、安全なチェックアウトに進みます。
+            リール情報を入力したうえで、安全な決済手続きに進みます。
           </p>
           <p class="payment-region-note">
             現在の販売対象は、米国および EU 圏です。
           </p>
         </div>
         <div class="payment-badges">
-          <span>Stripeカード決済</span>
+          <span>カード決済対応</span>
           <span>699米ドル</span>
           <span>米国 / EU</span>
           <span>24時間以内返信目標</span>
@@ -65,11 +65,11 @@
       <section class="glass-card" style="margin-bottom:1.5rem;">
         <p class="eyebrow">お支払い前に</p>
         <h2 style="margin-bottom:0.8rem;">オンラインカード決済が利用できます</h2>
-        <p style="margin:0;color:#36556c;">
-          現在は Stripe のカード決済が利用可能です。支払い前に確認したいことがある場合や、
-          個別対応を希望する場合は、日本語お問い合わせページから先に相談できます。
-          同梱の充電器はバッテリー構成に合わせたもので、100-240V 入力に対応しています。
-        </p>
+          <p style="margin:0;color:#36556c;">
+            現在は Stripe のカード決済が利用可能です。支払い前に確認したいことがある場合や、
+            個別対応を希望する場合は、日本語お問い合わせページから先に相談できます。
+            同梱の充電器はバッテリー構成に合わせたもので、100-240V 入力に対応しています。
+          </p>
         <div class="origin-points" style="margin-top:1rem;">
           <div>カード決済は Stripe で案内</div>
           <div>充電器資料は支払い前に案内可能</div>
@@ -162,7 +162,7 @@
                 <label>
                   通貨
                   <select id="currency">
-                    <option value="usd">米ドル (USD)</option>
+                    <option value="usd">米ドル</option>
                   </select>
                 </label>
                 <label class="checkout-field-wide">
@@ -215,7 +215,7 @@
               <label class="payment-choice payment-choice-active">
                 <input type="radio" name="payment-choice" value="card" checked />
                 <strong>カード決済</strong>
-                <span>Visa / Mastercard に対応した、Stripe の安全な決済画面へ進みます</span>
+                <span>Visa / Mastercard に対応した、安全な決済画面へ進みます</span>
               </label>
               <label class="payment-choice">
                 <input type="radio" name="payment-choice" value="support" />
@@ -361,7 +361,7 @@
 
         const params = new URLSearchParams(window.location.search);
         if (params.get("status") === "success") {
-          setStatus("支払いが完了しました。Stripe の領収書メールと、その後の注文確認連絡をご確認ください。", "success");
+          setStatus("支払いが完了しました。領収書メールと、その後の注文確認連絡をご確認ください。", "success");
         } else if (params.get("status") === "cancelled") {
           setStatus("支払いはキャンセルされました。内容を見直して、準備ができたら再度お試しください。", "info");
         }
@@ -379,7 +379,7 @@
 
           startButton.disabled = true;
           startButton.textContent = "決済画面を準備しています...";
-          setStatus("Stripe の安全なチェックアウトを準備しています...", "info");
+          setStatus("安全な決済手続きを準備しています...", "info");
 
           try {
             const response = await fetch("/api/create-checkout-session", {
