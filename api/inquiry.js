@@ -53,29 +53,28 @@ function compactMessage(value, max = 280) {
   return text.length > max ? `${text.slice(0, max - 1)}…` : text;
 }
 
-function slackField(title, value, short = false) {
+function slackField(title, value) {
   return {
     type: "mrkdwn",
-    text: `*${title}*\n${value || "—"}`,
-    short
+    text: `*${title}*\n${value || "—"}`
   };
 }
 
 function buildWebhookPayload(entry) {
   const title = entry.inquiryType === "wholesale" ? "New wholesale inquiry" : "New support inquiry";
   const fields = [
-    slackField("Type", entry.inquiryType, true),
-    slackField("Name", entry.name, true),
-    slackField("Country", entry.country, true),
-    slackField("Source", entry.sourcePage, true)
+    slackField("Type", entry.inquiryType),
+    slackField("Name", entry.name),
+    slackField("Country", entry.country),
+    slackField("Source", entry.sourcePage)
   ];
 
-  if (entry.company) fields.push(slackField("Company", entry.company, true));
-  if (entry.supportTopic) fields.push(slackField("Topic", entry.supportTopic, true));
-  if (entry.reelDetails) fields.push(slackField("Reel", entry.reelDetails, true));
-  if (entry.requestType) fields.push(slackField("Request", entry.requestType, true));
-  if (entry.quantity) fields.push(slackField("Quantity", entry.quantity, true));
-  if (entry.businessType) fields.push(slackField("Business", entry.businessType, true));
+  if (entry.company) fields.push(slackField("Company", entry.company));
+  if (entry.supportTopic) fields.push(slackField("Topic", entry.supportTopic));
+  if (entry.reelDetails) fields.push(slackField("Reel", entry.reelDetails));
+  if (entry.requestType) fields.push(slackField("Request", entry.requestType));
+  if (entry.quantity) fields.push(slackField("Quantity", entry.quantity));
+  if (entry.businessType) fields.push(slackField("Business", entry.businessType));
 
   return {
     text: `[Reel Mate ${entry.inquiryType}] ${entry.name || "Unknown"} / ${entry.country || "No country"}`,
