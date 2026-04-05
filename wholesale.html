@@ -134,17 +134,26 @@
             and whether you need stock product or private label support so we can
             guide the next step clearly.
           </p>
+          <p>
+            Partner replies are sent by email to the address you enter below.
+            This is a structured intake form, not a live-chat channel.
+          </p>
           <div class="subpage-points">
             <div>Fishing tackle shops and distributors welcome</div>
             <div>OEM / ODM and private label support available</div>
             <div>Suitable for Europe offshore and boat fishing channels</div>
+            <div>Replies are sent to your submitted email address</div>
           </div>
         </div>
 
         <form class="contact-form" id="inquiry-form">
           <label>
             Name
-            <input type="text" name="name" placeholder="Your name" />
+            <input type="text" name="name" placeholder="Your name" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" placeholder="you@company.com" required />
           </label>
           <label>
             Company
@@ -180,7 +189,7 @@
           </label>
           <label class="full-width">
             Message
-            <textarea name="message" rows="7" placeholder="Describe your market, target customers, and what kind of cooperation you are looking for."></textarea>
+            <textarea name="message" rows="7" placeholder="Describe your market, target customers, and what kind of cooperation you are looking for." required></textarea>
           </label>
           <button class="button" type="submit">Submit Partner Request</button>
           <p class="form-status" id="form-status" style="display:none;margin-top:1rem;font-weight:600;"></p>
@@ -223,7 +232,7 @@
         status.style.display = 'block';
         status.textContent = 'Submitting…';
         status.style.color = '';
-        var data = {};
+        var data = { sourcePage: 'wholesale.html' };
         form.querySelectorAll('input, select, textarea').forEach(function (el) {
           if (el.name) data[el.name] = el.value;
         });
@@ -235,7 +244,9 @@
         .then(function (r) { return r.json(); })
         .then(function (res) {
           if (res.success) {
-            status.textContent = 'Thank you! We received your partner request and will respond shortly.';
+            status.textContent = res.confirmationEmail && res.confirmationEmail.sent
+              ? 'Thank you. We received your partner request and sent a confirmation email. Our team will follow up by email.'
+              : 'Thank you. We received your partner request and will follow up by email.';
             status.style.color = '#0c7d82';
             form.reset();
           } else {

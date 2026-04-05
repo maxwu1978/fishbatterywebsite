@@ -138,6 +138,14 @@ function slackField(title, value) {
   };
 }
 
+function chunkFields(fields, size = 10) {
+  const chunks = [];
+  for (let index = 0; index < fields.length; index += size) {
+    chunks.push(fields.slice(index, index + size));
+  }
+  return chunks;
+}
+
 function buildConfirmationEmail(entry) {
   const japanese = isJapaneseInquiry(entry);
 
@@ -254,6 +262,11 @@ function buildWebhookPayload(entry) {
   if (entry.quantity) fields.push(slackField("Quantity", entry.quantity));
   if (entry.businessType) fields.push(slackField("Business", entry.businessType));
 
+  const fieldSections = chunkFields(fields).map((group) => ({
+    type: "section",
+    fields: group
+  }));
+
   return {
     text: `[Reel Mate ${entry.inquiryType}] ${entry.name || "Unknown"} / ${entry.country || "No country"}`,
     blocks: [
@@ -264,10 +277,7 @@ function buildWebhookPayload(entry) {
           text: title
         }
       },
-      {
-        type: "section",
-        fields
-      },
+      ...fieldSections,
       {
         type: "section",
         text: {
