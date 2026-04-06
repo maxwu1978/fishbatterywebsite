@@ -1063,6 +1063,69 @@ h3 {
   color: var(--navy);
 }
 
+.capacity-proof {
+  margin-top: 20px;
+  padding: 24px 26px;
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at top right, rgba(255, 215, 0, 0.12), transparent 24%),
+    linear-gradient(180deg, rgba(10, 44, 63, 0.96), rgba(16, 61, 86, 0.92));
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: var(--shadow);
+}
+
+.capacity-proof-copy h3 {
+  margin-bottom: 10px;
+  color: #f8fbff;
+}
+
+.capacity-proof-copy p:last-child {
+  margin-bottom: 0;
+  color: rgba(238, 247, 255, 0.9);
+}
+
+.capacity-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.capacity-proof-card {
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.capacity-proof-card strong,
+.capacity-proof-card span,
+.capacity-proof-card small {
+  display: block;
+}
+
+.capacity-proof-card strong {
+  margin-bottom: 8px;
+  color: #f8fbff;
+}
+
+.capacity-proof-card span {
+  margin-bottom: 8px;
+  color: #ffd76a;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.capacity-proof-card small {
+  color: rgba(238, 247, 255, 0.86);
+  line-height: 1.55;
+}
+
+.capacity-proof-card-featured {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 215, 0, 0.22);
+}
+
 .retail-assurance {
   padding: 34px 0 26px;
 }
@@ -2463,6 +2526,7 @@ h3 {
   .hero-offer,
   .retail-path-grid,
   .retail-offer-grid,
+  .capacity-proof-grid,
   .retail-assurance-grid,
   .use-case-grid,
   .finish-grid,
@@ -2666,6 +2730,15 @@ h3 {
   .retail-assurance-grid article {
     padding: 20px 18px;
     border-radius: 18px;
+  }
+
+  .capacity-proof {
+    padding: 20px 18px;
+    border-radius: 18px;
+  }
+
+  .capacity-proof-grid {
+    grid-template-columns: 1fr;
   }
 
   .hero-actions .button {
