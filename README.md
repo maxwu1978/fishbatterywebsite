@@ -19,6 +19,17 @@ Live site: <https://www.getreelmate.com/>
 | `ja*.html` | Japanese customer-facing pages |
 | `404.html` | Error page |
 
+## Localization workflow
+
+Use the fixed bilingual sync process in
+[`docs/多语言同步固定流程.md`](docs/多语言同步固定流程.md).
+
+Current default rule:
+
+- conversion-impacting English changes must be reviewed for Japanese sync
+- homepage pricing, offer, FAQ, trust, and order-flow updates should normally
+  be synchronized between `index.html` and `ja.html`
+
 ## Project structure
 
 ```
