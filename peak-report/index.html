@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Peak Smart 运营看板</title>
+<style>
+:root{--bg:#f4f6f9;--card:#fff;--ink:#1f2937;--mute:#6b7280;--line:#e5e7eb;--brand:#1e3a5f;--red:#dc2626;--redbg:#fef2f2;--amber:#d97706;--amberbg:#fffbeb;--green:#059669;--greenbg:#ecfdf5;--blue:#2563eb}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.6}
+header{background:var(--brand);color:#fff;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:5}
+header h1{margin:0;font-size:20px;letter-spacing:.5px}
+header .sub{font-size:12px;opacity:.8}
+#menuBtn{display:none;background:none;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:6px;padding:4px 10px;font-size:14px}
+.layout{display:flex;min-height:calc(100vh - 56px)}
+aside{width:240px;flex-shrink:0;background:#fff;border-right:1px solid var(--line);padding:14px}
+.tabs{display:flex;gap:6px;margin-bottom:12px}
+.tabs button{flex:1;padding:7px 0;border:1px solid var(--line);background:#f9fafb;border-radius:6px;cursor:pointer;font-size:14px;color:var(--ink)}
+.tabs button.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+.rlist a{display:block;padding:9px 10px;border-radius:6px;text-decoration:none;color:var(--ink);margin-bottom:4px;border:1px solid transparent}
+.rlist a:hover{background:#f3f4f6}
+.rlist a.on{background:#eef2f8;border-color:#c7d2e3;font-weight:600}
+.rlist small{display:block;color:var(--mute);font-weight:400}
+.empty{color:var(--mute);padding:10px;font-size:13px}
+main{flex:1;padding:20px 24px;max-width:1200px;min-width:0}
+h2{font-size:18px;margin:0 0 4px}
+h3{font-size:16px;margin:26px 0 10px;padding-left:8px;border-left:4px solid var(--brand)}
+.meta{color:var(--mute);font-size:12.5px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.notice{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;margin-top:12px;font-size:13px}
+.notice b{color:var(--blue)}
+.grid{display:grid;gap:12px}
+.g3{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.issue{border-radius:10px;padding:14px 16px;border:1px solid;border-left-width:6px}
+.issue.red{background:var(--redbg);border-color:#fecaca;border-left-color:var(--red)}
+.issue.amber{background:var(--amberbg);border-color:#fde68a;border-left-color:var(--amber)}
+.issue .ref{font-weight:700;font-size:15px}
+.issue .ttl{font-weight:600;margin:2px 0 6px}
+.issue .act{margin-top:6px;font-size:13px}
+.issue .act:before{content:"→ ";font-weight:700}
+.tag{display:inline-block;white-space:nowrap;font-size:11px;padding:1px 7px;border-radius:10px;font-weight:600;vertical-align:middle}
+.tag.red{background:var(--red);color:#fff}.tag.amber{background:var(--amber);color:#fff}.tag.green{background:var(--green);color:#fff}.tag.none{background:#e5e7eb;color:#374151}
+.guess{background:#ede9fe;color:#6d28d9;font-size:11px;padding:0 5px;border-radius:4px;margin:0 2px;font-weight:600}
+.person .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.person .nm{font-size:16px;font-weight:700}
+.person .fn{color:var(--mute);font-size:12px}
+.person .role{color:var(--mute);font-size:12.5px;margin:2px 0 8px}
+.cnt{text-align:right;white-space:nowrap}
+.cnt b{font-size:22px;color:var(--brand)}
+.cnt span{display:block;font-size:11px;color:var(--mute)}
+.sec{font-size:12px;font-weight:700;margin:8px 0 2px}
+.sec.c{color:var(--green)}.sec.p{color:var(--blue)}.sec.i{color:var(--red)}.sec.n{color:var(--mute)}
+ul{margin:0;padding-left:18px}
+li{margin:2px 0}
+.person.note{background:#fafafa;border-style:dashed}
+.tblwrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:760px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:13px}
+th{background:#f9fafb;font-weight:600;position:sticky;top:0}
+tr.f-red td{background:#fff5f5}tr.f-amber td{background:#fffcf0}
+td.id{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:600;white-space:nowrap}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.filters button{border:1px solid var(--line);background:#fff;border-radius:14px;padding:3px 12px;cursor:pointer;font-size:12.5px}
+.filters button.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+.an h4{margin:0 0 6px;font-size:14px}
+.corr li{color:#374151}
+footer{color:var(--mute);font-size:12px;margin:30px 0 10px;text-align:center}
+@media(max-width:800px){
+ #menuBtn{display:block}
+ aside{position:fixed;top:56px;left:0;bottom:0;z-index:4;transform:translateX(-100%);transition:transform .2s;box-shadow:2px 0 10px rgba(0,0,0,.1)}
+ aside.open{transform:none}
+ main{padding:14px}
+ .g3{grid-template-columns:1fr}
+ header h1{font-size:17px}
+}
+@media print{aside,header #menuBtn,.filters{display:none}main{max-width:none}}
+</style>
+</head>
+<body>
+<header>
+ <div><h1>Peak Smart 运营看板</h1><div class="sub">psreceiving 邮箱 · 周报 / 日报 · 内部资料</div></div>
+ <button id="menuBtn" onclick="document.querySelector('aside').classList.toggle('open')">报告列表</button>
+</header>
+<div class="layout">
+ <aside>
+  <div class="tabs"><button data-t="weekly">周报</button><button data-t="daily">日报</button></div>
+  <div class="rlist" id="rlist"></div>
+ </aside>
+ <main id="main"></main>
+</div>
+<script>
+const DATA = {"weekly":[{"id":"2026-W41","type":"weekly","title":"第 41 周周报（10/5–10/11）","period":{"start":"2026-10-05","end":"2026-10-11"},"generated_at":"2026-10-11T08:00+02:00","coverage":{"from":"2026-10-05 00:00","to":"2026-10-11 03:02","timezone":"布达佩斯时间","email_count":379,"source":"psreceiving@peaksmartlogistics.com（Max 的 Mac Mail）","note":"发信数只算抄送了 psreceiving 的邮件，会偏低。时间均为布达佩斯时间，另注明芝加哥时间的除外。"},"corrections":["Load#131882 的提单：Clare 10/8 晚上就发了，对方也确认了（此前说“没看到发出”有误）。","356-85591376：没赶上 10/10 的 GP 时段，Yuki 已改约到周一 10/12 11:30（此前说“没看到 Teddy 确认”有误）。"],"top_issues":[{"level":"red","ref":"297-77450321（ORD）","title":"一直没看到向 Bestway 下单","detail":"Bestway 那个线程 10/8 之后就没人再回过。周日提货的截止时间已经过了，最早只能周一提。3461 放行单也还没出。","action":"最后免费提货日（LFD）邮件里没写，要问 Teddy 或 Yuki。"},{"level":"amber","ref":"297-77450284","title":"放行单还没出","detail":"A 段约在 10/12 13:00 送 GP，B 段约在 10/13 10:30。","action":"跟报关行确认放行单，确保赶上预约时段。"},{"level":"amber","ref":"CSNU6328907","title":"周二送 GP 未确认","detail":"Otto 让 ConGlobal 自己去找 GP 约周二送货，之后没看到确认。","action":"向 Otto / ConGlobal 确认预约。"}],"highlights":["周末清关的 7 票里，354、306、365、295、273 已放行，284 和 321 还在等。"],"people":[{"name":"Clare","full_name":"Xuejie Chen","role":"国内卡车调度（冷藏车 / 干货车 / 厢式车）","sent_count":61,"badge":"全组最多","completed":["10/14 的 3 车冷藏车已订好（每车 3,700 美元），提单也发了","Load#131882（26 尺厢式车，10/12 提货）提单 10/8 晚上已发，对方已确认"],"in_progress":["4 车冷藏车：010 和 011 在途开往肯塔基，012 已装车","Megacorp 干货车 PSDELT261008001 已装车（10/12 送达）"],"issues":["Megacorp 不追就不给 CDL：PSDELT261008001 她一天追了 4 次，等了约 8 小时才拿到"],"notes":["用两个地址：clare.c@ 和 op3@"]},{"name":"Maggie","full_name":"Maggie Lam / Maggie Lin（待确认）","role":"尾板车（53 尺）询价与调度","sent_count":7,"completed":["OB261005-12 两车已完成"],"in_progress":["OB261007-24 在途开往俄勒冈（97008）"],"issues":["回复大多只有 \"Received\"，邮件里的工作量明显偏少，可能很多事没走邮件（推测）","签名是 \"Maggie Lam\"，和 Maggie Lin 对不上，需要确认"],"notes":[]},{"name":"Yuki","full_name":"Yuqi Shao","role":"空运进口全流程（预报、追报关单、约 GP 派送、付款回执）","sent_count":57,"completed":["本周发了约 7 票的到港预报","给 Sue 发了 10 张付款回执","周末各票送 GP 的预约基本都是她约的","GP 两次回错单号或时间，都是她发现后让对方改的"],"in_progress":["356-85591376 改约到周一 10/12 11:30 送 GP"],"issues":[],"notes":[]},{"name":"Teddy","full_name":"Teddy Li","role":"空运进口，周末清关协调，Delta 对接窗口","sent_count":39,"completed":["周末清关的汇总和协调","001-32219983 漏上舱单的问题 10/6 解决","295 的 Bestway 周日提货已下单"],"in_progress":["对接 Delta 的主要窗口"],"issues":["297-77450321 没看到向 Bestway 下单"],"notes":[]},{"name":"Otto","full_name":"Otto Chang","role":"海运（整柜、拼箱、Delta 海运单证）","sent_count":19,"completed":["OOCU7463332 已送到","拼箱 HSH26080648 并到 Teddy 那票空运里一起送 GP（处理得很好）","Delta 的海运单 TPEUB6081656 已放行"],"in_progress":["CSNU6328907 待确认周二送 GP"],"issues":["CSNU6328907 交给 ConGlobal 自己约之后没看到确认"],"notes":[]},{"name":"Mark Tang","role":"角色未确认","sent_count":null,"note_only":true,"completed":[],"in_progress":[],"issues":[],"notes":["只回过一句 Noted，可能是仓库或运营负责人，邮件里确认不了（推测）"]}],"shipments":[{"id":"297-77450321","type":"空运 ORD","owner":"Teddy / Yuki","status":"清关待放行；3461 放行单未出；未见向 Bestway 下单","next_step":"确认 Bestway 下单（最早周一提）；问 LFD","flag":"red"},{"id":"297-77450284","type":"空运 DFW","owner":"Yuki / Teddy","status":"清关待放行","next_step":"A 段 10/12 13:00 送 GP；B 段 10/13 10:30","flag":"amber"},{"id":"CSNU6328907","type":"海运整柜","owner":"Otto","status":"ConGlobal 自行约 GP 周二送货，未见确认","next_step":"确认预约","flag":"amber"},{"id":"356-85591376","type":"空运","owner":"Yuki","status":"未赶上 10/10 GP 时段","next_step":"10/12 11:30 送 GP","flag":"amber"},{"id":"297-77450354","type":"空运 DFW（周末清关）","owner":"Teddy / Yuki","status":"已放行","next_step":"","flag":"green"},{"id":"297-77450306","type":"空运 DFW（周末清关）","owner":"Teddy / Yuki","status":"已放行","next_step":"","flag":"green"},{"id":"…365","type":"空运（周末清关）","owner":"Teddy / Yuki","status":"已放行","next_step":"","flag":"green"},{"id":"…295","type":"空运（周末清关）","owner":"Teddy","status":"已放行；Bestway 周日提货已下单","next_step":"","flag":"green"},{"id":"…273","type":"空运（周末清关）","owner":"Teddy / Yuki","status":"已放行","next_step":"","flag":"green"},{"id":"001-32219983","type":"空运","owner":"Teddy","status":"漏上舱单问题 10/6 已解决","next_step":"","flag":"green"},{"id":"PSDELT261008001","type":"卡车 干货车（Megacorp）","owner":"Clare","status":"已装车","next_step":"10/12 送达","flag":"none"},{"id":"冷藏车 010 / 011","type":"卡车 冷藏车","owner":"Clare","status":"在途开往肯塔基","next_step":"","flag":"none"},{"id":"冷藏车 012","type":"卡车 冷藏车","owner":"Clare","status":"已装车","next_step":"","flag":"none"},{"id":"10/14 冷藏车 ×3","type":"卡车 冷藏车","owner":"Clare","status":"已订好（每车 3,700 美元），提单已发","next_step":"10/14 提货","flag":"none"},{"id":"Load#131882","type":"卡车 26 尺厢式车","owner":"Clare","status":"提单 10/8 已发，对方已确认","next_step":"10/12 提货","flag":"none"},{"id":"OB261007-24","type":"卡车 尾板车","owner":"Maggie","status":"在途开往俄勒冈（97008）","next_step":"","flag":"none"},{"id":"OB261005-12","type":"卡车 尾板车 ×2","owner":"Maggie","status":"已完成","next_step":"","flag":"green"},{"id":"OOCU7463332","type":"海运整柜","owner":"Otto","status":"已送到","next_step":"","flag":"green"},{"id":"HSH26080648","type":"海运拼箱","owner":"Otto","status":"并入 Teddy 那票空运一起送 GP","next_step":"","flag":"green"},{"id":"TPEUB6081656","type":"海运单（Delta）","owner":"Otto","status":"已放行","next_step":"","flag":"green"}],"analysis":{"workload":["本周大约处理了 20 票空运、10 车左右的卡车运输，另外还有 6 个海运货柜。","发信数（仅抄送 psreceiving）：Clare 61、Yuki 57、Teddy 39、Otto 19、Maggie 7。"],"responsiveness":["内部响应很快，外部来信一般 1 小时内就有人跟进。","慢的主要在外部：报关行常要等 1 到 2 天，还得我们去追才出放行单。","Megacorp 不追就不给 CDL。"],"process_issues":["同一票货没有明确负责人：Yuki 和 Teddy 经常一个人发预报、另一个人追进度，321 的漏单很可能就是这么漏掉的（推测）。","对外预约容易断在半路：Bestway 和 CSNU6328907 这两件都是交给外部去约之后，就没人再确认。","每个人都用两个地址（比如 Clare 用 clare.c@ 和 op3@），外部回信时容易漏人。"],"suggestions":["每票指定一个负责人。","让 bot 每天维护一张状态表，标出三种票：已到港但没放行单的、已放行但没下提货单的、快到 LFD 的。321 这种情况周五就能发现。","外部问了问题、超过 4 小时没人回的，bot 也提醒。","尽量做到每封邮件都抄送 psreceiving。"]}}],"daily":[]};
+const BUILT_AT = "2026-10-11 08:41（布达佩斯时间）";
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt = s => esc(s).replace(/（推测）|\(推测\)/g,'<span class="guess">推测</span>');
+const FLAG = {red:"紧急",amber:"关注",green:"完成",none:"正常"};
+let state = {tab:"weekly", id:null, filter:"all"};
+
+function sorted(t){return (DATA[t]||[]).slice().sort((a,b)=>String(b.id).localeCompare(String(a.id)))}
+function list(arr,cls,title){ if(!arr||!arr.length) return ""; return `<div class="sec ${cls}">${title}</div><ul>${arr.map(x=>`<li>${fmt(x)}</li>`).join("")}</ul>`}
+
+function renderList(){
+  document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("on",b.dataset.t===state.tab));
+  const arr = sorted(state.tab);
+  $("#rlist").innerHTML = arr.length ? arr.map(r=>{
+    const p = r.period||{}; const sub = r.type==="daily" ? (p.start||r.id) : `${p.start||""} – ${p.end||""}`;
+    return `<a href="#${r.type||state.tab}/${encodeURIComponent(r.id)}" class="${r.id===state.id?"on":""}">${esc(r.title||r.id)}<small>${esc(sub)}</small></a>`}).join("")
+    : `<div class="empty">暂无${state.tab==="weekly"?"周报":"日报"}。日报会在工作日早上自动生成。</div>`;
+}
+
+function renderReport(){
+  const r = (DATA[state.tab]||[]).find(x=>x.id===state.id);
+  if(!r){ $("#main").innerHTML = `<div class="box empty">请从左侧选择一份报告。</div>`; return; }
+  const c = r.coverage||{};
+  let h = `<h2>${esc(r.title||r.id)}</h2><div class="meta">覆盖 ${esc(c.from||"")} – ${esc(c.to||"")}（${esc(c.timezone||"布达佩斯时间")}）`+
+    (c.email_count!=null?` · ${esc(c.email_count)} 封邮件`:"")+(c.source?` · 来源：${esc(c.source)}`:"")+`</div>`;
+  if(c.note) h += `<div class="meta">${fmt(c.note)}</div>`;
+  if(r.corrections&&r.corrections.length) h += `<div class="notice"><b>更正：</b><ul class="corr">${r.corrections.map(x=>`<li>${fmt(x)}</li>`).join("")}</ul></div>`;
+
+  h += `<h3>最要紧的事</h3>`;
+  h += (r.top_issues&&r.top_issues.length) ? `<div class="grid g3">${r.top_issues.map((t,i)=>`<div class="issue ${t.level==="red"?"red":"amber"}">
+    <div><span class="tag ${t.level==="red"?"red":"amber"}">${i+1} · ${t.level==="red"?"紧急":"关注"}</span></div>
+    <div class="ref">${esc(t.ref||"")}</div><div class="ttl">${fmt(t.title||"")}</div><div>${fmt(t.detail||"")}</div>
+    ${t.action?`<div class="act">${fmt(t.action)}</div>`:""}</div>`).join("")}</div>` : `<div class="box empty">无</div>`;
+  if(r.highlights&&r.highlights.length) h += `<div class="box" style="margin-top:12px"><ul>${r.highlights.map(x=>`<li>${fmt(x)}</li>`).join("")}</ul></div>`;
+
+  if(r.people&&r.people.length){
+    h += `<h3>每个人的情况</h3><div class="grid g3">${r.people.map(p=>`<div class="box person ${p.note_only?"note":""}">
+      <div class="top"><div><span class="nm">${esc(p.name)}</span> ${p.badge?`<span class="tag none">${esc(p.badge)}</span>`:""}
+      ${p.full_name?`<div class="fn">${esc(p.full_name)}</div>`:""}</div>
+      ${p.sent_count!=null?`<div class="cnt"><b>${esc(p.sent_count)}</b><span>发信数</span></div>`:""}</div>
+      ${p.role?`<div class="role">${fmt(p.role)}</div>`:""}
+      ${list(p.completed,"c","✓ 已完成")}${list(p.in_progress,"p","▶ 进行中")}${list(p.issues,"i","⚠ 问题")}${list(p.notes,"n","备注")}
+      </div>`).join("")}</div>`;
+  }
+
+  if(r.shipments&&r.shipments.length){
+    const flags=["all","red","amber","none","green"];
+    const rows = r.shipments.filter(s=>state.filter==="all"||(s.flag||"none")===state.filter);
+    h += `<h3>货物状态表</h3><div class="filters">${flags.map(f=>`<button data-f="${f}" class="${state.filter===f?"on":""}">${f==="all"?"全部 ("+r.shipments.length+")":FLAG[f]+" ("+r.shipments.filter(s=>(s.flag||"none")===f).length+")"}</button>`).join("")}</div>
+    <div class="tblwrap"><table><thead><tr><th>单号</th><th>负责人</th><th>类型</th><th>状态</th><th>下一步</th><th>标记</th></tr></thead><tbody>
+    ${rows.map(s=>{const f=s.flag||"none";return `<tr class="f-${f}"><td class="id">${esc(s.id)}</td><td>${esc(s.owner||"")}</td><td>${esc(s.type||"")}</td><td>${fmt(s.status||"")}</td><td>${fmt(s.next_step||"—")}</td><td><span class="tag ${f}">${FLAG[f]||f}</span></td></tr>`}).join("")}
+    </tbody></table></div>`;
+  }
+
+  const a = r.analysis;
+  if(a){
+    const secs=[["workload","工作量"],["responsiveness","响应速度"],["process_issues","流程问题"],["suggestions","改进建议"]].filter(([k])=>a[k]&&a[k].length);
+    if(secs.length) h += `<h3>团队分析</h3><div class="grid g3">${secs.map(([k,t])=>`<div class="box an"><h4>${t}</h4><ul>${a[k].map(x=>`<li>${fmt(x)}</li>`).join("")}</ul></div>`).join("")}</div>`;
+  }
+  h += `<footer>生成于 ${esc(r.generated_at||"")} · 页面构建于 ${esc(BUILT_AT)} · 仅供内部使用</footer>`;
+  $("#main").innerHTML = h;
+  document.querySelectorAll(".filters button").forEach(b=>b.onclick=()=>{state.filter=b.dataset.f;renderReport()});
+}
+
+function route(){
+  const m = location.hash.match(/^#(weekly|daily)\/(.+)$/);
+  if(m){ state.tab=m[1]; state.id=decodeURIComponent(m[2]); }
+  else {
+    const w=sorted("weekly")[0], d=sorted("daily")[0];
+    if(!state.id){ if(w){state.tab="weekly";state.id=w.id} else if(d){state.tab="daily";state.id=d.id} }
+  }
+  state.filter="all";
+  renderList(); renderReport();
+  document.querySelector("aside").classList.remove("open");
+}
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{state.tab=b.dataset.t;const f=sorted(state.tab)[0];if(f)location.hash=`#${state.tab}/${encodeURIComponent(f.id)}`;else{state.id=null;renderList();renderReport()}});
+window.addEventListener("hashchange",route);
+route();
+</script>
+</body>
+</html>
