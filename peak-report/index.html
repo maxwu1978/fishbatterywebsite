@@ -492,7 +492,12 @@ function trTree(root){
 }
 
 let DATA = localize(RAW_DATA, LANG);
-const BUILT_AT = "2026-10-14 07:32（布达佩斯时间）";
+const BUILT_AT = "2026-10-14T05:34Z";
+const _dfwF=new Intl.DateTimeFormat("en-US",{timeZone:"America/Chicago",hourCycle:"h23",year:"numeric",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"});
+function dfwT(iso){ const m=String(iso||"").match(/^(\d{4}-\d{2}-\d{2})[T ](\d{2}:\d{2})(?::\d{2}(?:\.\d+)?)?(Z|[+-]\d{2}:?\d{2})?/); if(!m) return String(iso||"—");
+  const t=Date.parse(`${m[1]}T${m[2]}:00${m[3]||"+02:00"}`); if(isNaN(t)) return String(iso);
+  const p=Object.fromEntries(_dfwF.formatToParts(new Date(t)).map(x=>[x.type,x.value])); return `${p.month}/${p.day} ${p.hour}:${p.minute} DFW` }
+const builtLbl=()=>LANG==="en"?`Page built ${dfwT(BUILT_AT)}`:`页面构建于 ${dfwT(BUILT_AT)}`;
 const $ = s => document.querySelector(s);
 const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmt = s => esc(s).replace(/（推测）|\(推测\)/g,'<span class="guess">推测</span>').replace(/\(inferred\)/g,'<span class="guess">inferred</span>');
@@ -649,7 +654,7 @@ function renderSearch(){
   document.querySelectorAll(".stype").forEach(x=>x.addEventListener("change",go));
   $("#sclear").onclick=()=>{state.q={text:"",person:"",flag:"",from:"",to:"",types:["daily","weekly","monthly"]};history.replaceState(null,"","#search");renderSearch()};
   renderResults();
-  $("#foot").textContent=`页面构建于 ${BUILT_AT}`;
+  $("#foot").textContent=builtLbl();
 }
 function renderResults(){
   const R=search(state.q), el=$("#sres");
@@ -677,7 +682,7 @@ function renderShip(id){
   $("#main").innerHTML=`<section class="hero"><div class="wrap"><div class="eyebrow">Shipment history · 单票历史</div><h1 class="title mono">${esc(tl.length?latestOf(tl).s.id:id)}</h1>
     <div class="cov"><span>${tl.length?`出现在 ${tl.length} 份报告里，${md(tl[0].d0)} 到 ${md(tl[tl.length-1].de)}`:"所有报告里都没有这个单号"}</span><span><a class="lnk" href="${qToHash({text:id,person:"",flag:"",from:"",to:"",types:["daily","weekly","monthly"]})}" style="color:var(--navy)">在历史查询里搜索</a></span></div></div></section>
     <section class="band"><div class="wrap">${tl.length?shipCard(key,tl,null,[]):`<div class="empty">没有记录。</div>`}</div></section>`;
-  $("#foot").textContent=`页面构建于 ${BUILT_AT}`;
+  $("#foot").textContent=builtLbl();
 }
 
 /* ===================== v3: archive ===================== */
@@ -705,7 +710,7 @@ function renderArchive(){
     </div></div>`;
   });
   $("#main").innerHTML=h+`</div></section>`;
-  $("#foot").textContent=`页面构建于 ${BUILT_AT}`;
+  $("#foot").textContent=builtLbl();
 }
 
 /* ---------- KPIs ---------- */
@@ -958,11 +963,11 @@ function render(){
   if(state.owner!=="all"&&r&&!ownerList(r).includes(state.owner)) state.owner="all";
   if(!r){
     $("#main").innerHTML=`<section><div class="wrap"><div class="empty">${{daily:"暂无日报。工作日早上 8:10（布达佩斯时间）会自动生成。",weekly:"暂无周报。",monthly:"暂无月报。每月第一个工作日生成上个月的月报，月中会有一份进行中的版本。"}[state.tab]}</div></div></section>`;
-    $("#foot").textContent=`页面构建于 ${BUILT_AT}`; return;
+    $("#foot").textContent=builtLbl(); return;
   }
   $("#main").innerHTML=r.type==="monthly"?hero(r)+attention(r)+trend(r)+people(r)+customs(r)+xref(r)+table(r)+analysis(r):hero(r)+attention(r)+people(r)+customs(r)+xref(r)+table(r)+analysis(r);
   const g=String(r.generated_at||"").match(/^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2})/);
-  $("#foot").textContent=`报告生成于 ${g?g[1]+" "+g[2]+"（布达佩斯时间）":(r.generated_at||"—")} · 页面构建于 ${BUILT_AT}`;
+  $("#foot").textContent=(LANG==="en"?`Updated ${r.generated_at?dfwT(r.generated_at):"—"}`:`更新于 ${r.generated_at?dfwT(r.generated_at):"—"}`)+" · "+builtLbl();
   bind(); requestAnimationFrame(()=>clampify($("#main")));
 }
 function bind(){
